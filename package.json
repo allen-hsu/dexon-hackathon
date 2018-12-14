@@ -1,0 +1,21 @@
+{
+  "name": "dexon-hackathon",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "postinstall": "touch secret.js",
+    "compile": "dexon-truffle compile",
+    "migrate_local": "dexon-truffle migrate --network development",
+    "test": "dexon-truffle test --network development",
+    "migrate": "dexon-truffle migrate --network dexon"
+  },
+  "dependencies": {
+    "@dexon-foundation/truffle": "^4.1.16",
+    "truffle-hdwallet-provider": "github:trufflesuite/truffle-hdwallet-provider"
+  }
+}
