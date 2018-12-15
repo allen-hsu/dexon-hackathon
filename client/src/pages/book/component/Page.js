@@ -3,7 +3,7 @@ import { PageItem, PageWrapper, PageScene, PageBook, PageBox } from "../style";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
 import { Link } from "react-router-dom";
-import testImg from require("./page_back1.png")
+import testImg from "../../../statics/images/page_back1.png";
 class Page extends PureComponent {
   render() {
     return (
@@ -11,11 +11,10 @@ class Page extends PureComponent {
         <PageScene>
           <PageBook>
             <PageItem className="setbig big">
-                <PageBox> 
-                    <img src={testImg} />
-                </PageBox> 
+              <PageBox>
+                <img alt="" src={testImg} />
+              </PageBox>
             </PageItem>
-            
           </PageBook>
         </PageScene>
       </PageWrapper>

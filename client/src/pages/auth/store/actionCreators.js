@@ -2,7 +2,7 @@ import * as constants from "./constants";
 import { fromJS } from "immutable";
 import axios from "axios";
 import truffleContract from "truffle-contract";
-import SimpleStorageContract from "../../../sourceLoader";
+import SimpleStorageContract from "../../../jsonLoader";
 // import SimpleStorageContract from "../../../contracts/SimpleStrong.json";
 // const changeDetail = (title, content) => ({
 //   type: constants.CHANGE_DETAIL,
