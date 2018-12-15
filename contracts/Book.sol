@@ -11,6 +11,7 @@ contract Book
         init();
     }
     
+    // 段落更新成功時發送通知
     event storyUpdated(uint32 partID, address author, uint256 currentValue, uint8 color, uint8 font, string content);
     
     // 段落定義
@@ -30,6 +31,9 @@ contract Book
     
     // public 獎金池
     uint256 public rewardPool = 0;
+    
+    // public 貢獻榜 (作者錢包地址與貢獻段落數量)
+    mapping(address => uint32) public leaderboard;
     
     // 我們服務用的錢包地址
     address owner;
@@ -60,13 +64,14 @@ contract Book
         
         // 發錢囉
         // 先讓前一位作者拿回本金
+        address lastAuthor = parts[partID].author;
         uint256 lastValue = parts[partID].currentValue;
-        withdrawToSomeone(parts[partID].author, lastValue);
+        withdrawToSomeone(lastAuthor, lastValue);
         // 分配剩餘金額
         uint256 n = value - lastValue;
         n = n / 10;
         // 前一位作者的紅利
-        withdrawToSomeone(parts[partID].author, n * 5);
+        withdrawToSomeone(lastAuthor, n * 5);
         // 給我們的酬勞
         withdrawToSomeone(owner, n * 4);
         // 進入獎金池
@@ -75,6 +80,10 @@ contract Book
         //交易成立，更改段落
         StoryPart memory part = StoryPart(partID, msg.sender, value, color, font, content);
         parts[partID] = part;
+        //更新排行榜
+        leaderboard[msg.sender] ++;
+        if(lastAuthor != owner) leaderboard[lastAuthor] --;
+        //發送更動段落的通知
         emit storyUpdated(partID, msg.sender, value, color, font, content);
     }
 //endregion  
