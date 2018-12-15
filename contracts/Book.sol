@@ -36,7 +36,7 @@ contract Book
     mapping(address => uint32) public leaderboard;
     
     // public 已結束編輯了嗎，若結束編輯則所有會更動資料的功能都不能用
-    bool isEnd = false;
+    bool public isEnd = false;
     
     // 我們服務用的錢包地址
     address owner;
