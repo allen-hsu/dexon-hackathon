@@ -1,13 +1,23 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { BookWrapper } from "./style";
+import { BookWrapper, PageItem } from "./style";
+import Page from "./component/Page";
 import { actionCreators } from "./store";
 import { from } from "rxjs";
 class Book extends PureComponent {
   render() {
     return (
-      <BookWrapper>這是一個測試</BookWrapper>
+      <BookWrapper>
+        這是一個測試
+        <Page>
+          <PageItem />
+          <PageItem />
+          <PageItem />
+          <PageItem />
+        </Page>
+      </BookWrapper>
+
       // <DetailWrapper>
       //   <Header>{this.props.title}</Header>
       //   <Content dangerouslySetInnerHTML={{ __html: this.props.content }} />

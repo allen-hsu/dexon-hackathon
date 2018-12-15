@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const BookWrapper = styled.div`
-  position: relative;
-  margin: 30px auto;
-`;
 // export const Header = styled.div`
 //   margin: 50px 0 20px 0;
 //   line-height: 44px;
