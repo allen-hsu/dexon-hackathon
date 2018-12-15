@@ -1,1 +1,1 @@
-export const CHANGE_DETAIL = "detail/CHANGE_DETAIL";
+export const AUTH_WEB3 = "auth/AUTH_WEB3";
