@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.4.25;
 
 contract Book
 {
@@ -17,7 +17,7 @@ contract Book
     struct StoryPart
     {
         uint32 id;              //段落編號
-        address payable author;         //該段落目前作者
+        address author;         //該段落目前作者
         uint256 currentValue;   //目前價值
         uint8 color;            //文字顏色
         uint8 font;             //文字字型
@@ -32,7 +32,7 @@ contract Book
     uint256 public rewardPool = 0;
     
     // 我們服務用的錢包地址
-    address payable owner;
+    address owner;
     
     // 每段字數上限
     uint32 maxCharPerPart;
@@ -109,7 +109,6 @@ contract Book
     {
         return parts[partID].font;
     }
-
 //endregion
 
 //region private function   
@@ -123,7 +122,7 @@ contract Book
         }
     }
     
-    function withdrawToSomeone(address payable someone, uint amount) private returns(bool) {
+    function withdrawToSomeone(address someone, uint amount) private returns(bool) {
         require(amount < address(this).balance);
         address(someone).transfer(amount);
         return true;
