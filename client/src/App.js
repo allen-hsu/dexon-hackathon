@@ -5,6 +5,7 @@ import truffleContract from "truffle-contract";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
 import Book from "./pages/book";
+import Auth from "./pages/auth";
 // import GlobalStyleFont from "./statics/iconfont/iconfont";
 import GlobalStyle from "./style";
 import store from "./store";
@@ -55,7 +56,8 @@ class App extends Component {
         <Provider store={store}>
           <BrowserRouter>
             <div>
-              <Route path="/" exact component={Book} />
+              <Route path="/" exact component={Auth} />
+              <Route path="/book" exact component={Book} />
             </div>
           </BrowserRouter>
         </Provider>

@@ -8,14 +8,21 @@ module.exports = {
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   networks: {
     dexon: {
-      provider: new HDWalletProvider(mnemonic, "http://testnet.dexon.org:8545"),
-      network_id: "*",
-      gas: 4712388
+      provider: new HDWalletProvider(
+        mnemonic,
+        "http://testnet.dexon.org:8545",
+        0,
+        1,
+        true,
+        "m/44'/237'/0'/0/"
+      ),
+      network_id: "*"
     },
     development: {
       network_id: "*",
       host: "localhost",
       port: 7545,
+      from: "0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef",
       gas: 4712388
     }
   }
