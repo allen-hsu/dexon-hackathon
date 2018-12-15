@@ -52,6 +52,9 @@ contract Book
 //endregion
 
 //region buy function    
+    function getStoryPartCount() public view returns(uint256) {
+        return parts.length;
+    }
     // 使用者購買段落所有權
     function buyStoryPart(uint32 partID, uint8 color, uint8 font, string memory content)
     editable inBook(partID) public  payable

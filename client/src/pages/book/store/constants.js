@@ -5,3 +5,5 @@ export const GET_CONTENT = "book/GET_CONTENT";
 export const GET_COLOR = "book/GET_COLOR";
 export const GET_FONT = "book/GET_COLOR";
 export const UPDATE_STORAGE_VALUE = "book/UPDATE_STORAGE_VALUE";
+export const UPDATE_REWARD_VALUE = "book/UPDATE_REWARD_VALUE";
+export const UPDATE_STORY_PART_VALUE = "book/UPDATE_STORY_PART_VALUE";
