@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { DetailWrapper } from "./style";
+import { BookWrapper } from "./style";
 import { actionCreators } from "./store";
 import { from } from "rxjs";
 class Book extends PureComponent {

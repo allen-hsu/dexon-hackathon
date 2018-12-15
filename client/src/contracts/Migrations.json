@@ -1374,14 +1374,7 @@
     "name": "dsolc",
     "version": "0.4.25+commit.433aebb7.Emscripten.clang"
   },
-  "networks": {
-    "238": {
-      "events": {},
-      "links": {},
-      "address": "0xc0c2cff4bcc657d9cd46da9abaf511f3b46cff7d",
-      "transactionHash": "0x40492622580439c3ca6b12bf0ae3675d2cae3be481260d173ca4f68b50cf698c"
-    }
-  },
+  "networks": {},
   "schemaVersion": "2.0.2",
-  "updatedAt": "2018-12-14T17:59:32.933Z"
+  "updatedAt": "2018-12-15T02:17:20.351Z"
 }
