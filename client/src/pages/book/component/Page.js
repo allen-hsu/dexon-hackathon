@@ -20,13 +20,20 @@ class Page extends PureComponent {
       </PageWrapper>
     );
   }
+  componentDidMount() {
+    this.props.getLastValue();
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({});
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  getLastValue() {
+    dispatch(actionCreators.getLastValue(1));
+  }
+});
 export default connect(
   mapStateToProps,
   mapDispatchToProps

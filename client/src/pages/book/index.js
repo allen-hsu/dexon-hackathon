@@ -7,27 +7,36 @@ import { actionCreators } from "./store";
 import { from } from "rxjs";
 class Book extends PureComponent {
   render() {
-    return (
-      <BookWrapper>
-        這是一個測試
-        <Page />
-      </BookWrapper>
-    );
+    const { web3States, updateStorageValue, storageValue } = this.props;
+    if (web3States) {
+      return (
+        <BookWrapper onClick={() => updateStorageValue(1)}>
+          這是一個測試{storageValue}
+          <Page />
+        </BookWrapper>
+      );
+    } else {
+      return <div>沒有Web3 loding</div>;
+    }
   }
 
   componentDidMount() {
-    this.props.getDetail(this.props.match.params.id);
+    this.props.authWeb3();
   }
 }
 
 const mapStateToProps = state => ({
-  title: state.getIn(["detail", "title"]),
-  content: state.getIn(["detail", "content"])
+  web3States: state.getIn(["book", "web3"]),
+  storageValue: state.getIn(["book", "storageValue"])
 });
 
-const mapDispathToProps = dispatch => ({
-  getDetail(id) {
-    dispatch(actionCreators.getDetail(id));
+const mapDispathToProps = (dispatch, ownProps) => ({
+  authWeb3() {
+    dispatch(actionCreators.authWeb3Action());
+  },
+
+  updateStorageValue(value) {
+    dispatch(actionCreators.setStorageValue(value));
   }
 });
 
