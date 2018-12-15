@@ -17,7 +17,7 @@ contract Book
     struct StoryPart
     {
         uint32 id;              //段落編號
-        address author;         //該段落目前作者
+        address payable author;         //該段落目前作者
         uint256 currentValue;   //目前價值
         uint8 color;            //文字顏色
         uint8 font;             //文字字型
@@ -32,7 +32,7 @@ contract Book
     uint256 public rewardPool = 0;
     
     // 我們服務用的錢包地址
-    address owner;
+    address payable owner;
     
     // 每段字數上限
     uint32 maxCharPerPart;
@@ -40,8 +40,8 @@ contract Book
     // 段落總數
     uint32 totalPart;
     
-    // 所有段落的初始價值
-    uint256 defaultValue = 1 ether;
+    // 所有段落的初始價值 1 Dexon
+    uint256 defaultValue = 1e18;
     
     // 下次增額的倍率
     // ufixed8x8 nextValueRate = 1.5;
@@ -51,19 +51,31 @@ contract Book
     // 使用者購買段落所有權
     function buyStoryPart(uint32 partID, uint8 color, uint8 font, string memory content) inBook(partID) public  payable
     {
-        //檢查交易金額
+        // 檢查交易金額
         uint256 value = msg.value;
         require(value >= parts[partID].currentValue / 2 * 3);
         
-        //檢查字數
+        // 檢查字數
         require(bytes(content).length <= maxCharPerPart);
+        
+        // 發錢囉
+        // 先讓前一位作者拿回本金
+        uint256 lastValue = parts[partID].currentValue;
+        withdrawToSomeone(parts[partID].author, lastValue);
+        // 分配剩餘金額
+        uint256 n = value - lastValue;
+        n = n / 10;
+        // 前一位作者的紅利
+        withdrawToSomeone(parts[partID].author, n * 5);
+        // 給我們的酬勞
+        withdrawToSomeone(owner, n * 4);
+        // 進入獎金池
+        rewardPool += n;
         
         //交易成立，更改段落
         StoryPart memory part = StoryPart(partID, msg.sender, value, color, font, content);
         parts[partID] = part;
         emit storyUpdated(partID, msg.sender, value, color, font, content);
-        
-        //發錢囉
     }
 //endregion  
     
@@ -109,6 +121,12 @@ contract Book
             StoryPart memory part = StoryPart(i, owner, defaultValue, 0, 0, "");
             parts.push(part);
         }
+    }
+    
+    function withdrawToSomeone(address payable someone, uint amount) private returns(bool) {
+        require(amount < address(this).balance);
+        address(someone).transfer(amount);
+        return true;
     }
      
     //結束
