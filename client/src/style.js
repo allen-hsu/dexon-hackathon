@@ -48,5 +48,19 @@ const GlobalStyle = createGlobalStyle`
   table {
     border-collapse: collapse;
     border-spacing: 0;
-  }`;
+  }
+  
+  body {
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+}
+p {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+  
+  `;
 export default GlobalStyle;
