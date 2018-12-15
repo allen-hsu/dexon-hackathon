@@ -28,17 +28,49 @@ export const PageBook = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 `;
 
-export const PageItem = styled.section`
-  background: red;
-  margin: 50px 0 20px 0;
+export const PageBox = styled.div`
   width: 100%;
-  height: 100px;
+  height: 100%;
+  background-size: contain;
 `;
+
+
+export const PageItem = styled.div`
+    cursor: pointer;
+    position: absolute;
+    color: black;
+    width: 100 % ;
+    height: 100 % ;
+    webkit - transition: 1.5 s - webkit - transform;
+    transition: 1.5 s transform; -
+    webkit - transform - style: preserve - 3 d;
+    transform - style: preserve - 3 d; -
+    webkit - transform - origin: left center; -
+    ms - transform - origin: left center;
+    transform - origin: left center;
+    background-color: red;
+    .front,
+    .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .back {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+`;
+
 // export const Header = styled.div`
 //   margin: 50px 0 20px 0;
 //   line-height: 44px;
