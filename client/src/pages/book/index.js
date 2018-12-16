@@ -62,69 +62,8 @@ class Book extends PureComponent {
           <PageWrapper>
             <div className="btn click_prev"></div>
             <div className="btn click_next"></div>
-            <div className="one_page left">           
-              <article className="single_article">
-                    <div className="content">
-                        <p>第一筆：「為了讓人類有成功的生活，神提供了兩種管道：教育與運動」。而實際上這兩種管道是相輔相成，缺一不可。在幼兒的成長，健康是最重要的，也是最好的投資，運動就是健康的最佳選擇。迷你足球不只是運動，也是教育。研究發現，當一個人大量運動時會分泌多巴胺、血清素和正腎上腺素，這三種神經傳導物質都跟情緒與學習有關。多巴胺是種正向的情緒物質，人要快樂，大腦中一定要有多巴胺，這就是我們看到運動完的人心情都是。</p>
-                        <div className="info">
-                            <div className="left">
-                                <p>當前價格：9.533 dex </p>
-                                <p>作者：God's right hand</p>
-                                <p>最後編輯時間：2018/12/12 23:08</p>
-                            </div>
-                            <div className="right">
-                                <div className="btn btn_edit">Edit</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article className="single_article">
-                    <div className="content">
-                        <p>第一筆：「為了讓人類有成功的生活，神提供了兩種管道：教育與運動」。而實際上這兩種管道是相輔相成，缺一不可。在幼兒的成長，健康是最重要的，也是最好的投資，運動就是健康的最佳選擇。迷你足球不只是運動，也是教育。研究發現，當一個人大量運動時會分泌多巴胺、血清素和正腎上腺素，這三種神經傳導物質都跟情緒與學習有關。多巴胺是種正向的情緒物質，人要快樂，大腦中一定要有多巴胺，這就是我們看到運動完的人心情都是。</p>
-                        <div className="info">
-                            <div className="left">
-                                <p>當前價格：9.533 dex </p>
-                                <p>作者：God's right hand</p>
-                                <p>最後編輯時間：2018/12/12 23:08</p>
-                            </div>
-                            <div className="right">
-                                <div className="btn btn_edit">Edit</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div className="one_page right">           
-              <article className="single_article">
-                    <div className="content">
-                        <p>第一筆：「為了讓人類有成功的生活，神提供了兩種管道：教育與運動」。而實際上這兩種管道是相輔相成，缺一不可。在幼兒的成長，健康是最重要的，也是最好的投資，運動就是健康的最佳選擇。迷你足球不只是運動，也是教育。研究發現，當一個人大量運動時會分泌多巴胺、血清素和正腎上腺素，這三種神經傳導物質都跟情緒與學習有關。多巴胺是種正向的情緒物質，人要快樂，大腦中一定要有多巴胺，這就是我們看到運動完的人心情都是。</p>
-                        <div className="info">
-                            <div className="left">
-                                <p>當前價格：9.533 dex </p>
-                                <p>作者：God's right hand</p>
-                                <p>最後編輯時間：2018/12/12 23:08</p>
-                            </div>
-                            <div className="right">
-                                <div className="btn btn_edit">Edit</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article className="single_article">
-                    <div className="content">
-                        <p>第一筆：「為了讓人類有成功的生活，神提供了兩種管道：教育與運動」。而實際上這兩種管道是相輔相成，缺一不可。在幼兒的成長，健康是最重要的，也是最好的投資，運動就是健康的最佳選擇。迷你足球不只是運動，也是教育。研究發現，當一個人大量運動時會分泌多巴胺、血清素和正腎上腺素，這三種神經傳導物質都跟情緒與學習有關。多巴胺是種正向的情緒物質，人要快樂，大腦中一定要有多巴胺，這就是我們看到運動完的人心情都是。</p>
-                        <div className="info">
-                            <div className="left">
-                                <p>當前價格：9.533 dex </p>
-                                <p>作者：God's right hand</p>
-                                <p>最後編輯時間：2018/12/12 23:08</p>
-                            </div>
-                            <div className="right">
-                                <div className="btn btn_edit">Edit</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            <div className="one_page ">           
+              <ArticleList />
             </div>
           </PageWrapper>
 

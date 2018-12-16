@@ -189,6 +189,8 @@ b {
   font-size: 24px;
   cursor: pointer;
   color: #fff;
+  background-color:rgba(0,0,0,0);
+  border:0;
 
   &:hover {
       background-position: left bottom;
@@ -255,18 +257,14 @@ b {
 }
 
 .one_page {
-  width: calc( 50% - 50px );
-  float: left;
-  &.left {
-      margin-left: 50px;
-  }
-  &.right {
-      margin-right: 50px;
-  }
-  .single_article {
-  padding: 3vw 1.5vw 0;
-  font-size: 17px;
-  line-height: 1.6;
+  width: calc( 100% - 100px );
+    margin: 0 auto;
+    .single_article {
+        width: calc( 50% - 50px);
+        padding: 3vw 1.5vw 0;
+        font-size: 17px;
+        line-height: 1.6;
+        float: left;
 
   .content {
       position: relative;
@@ -299,6 +297,12 @@ b {
           color: #fff;
           font-size: 15px;
           padding: 3px 10px;
+
+          .author {
+            white-space: pre;
+            text-overflow : ellipsis;
+            overflow: hidden;
+          }
 
           .left {
               width: 70%;

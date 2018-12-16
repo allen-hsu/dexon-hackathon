@@ -6,12 +6,23 @@ class Article extends PureComponent {
   render() {
     const { id, author, content, currentValue, toggleEditor } = this.props;
     return (
-      <div>
-        <div>作者: {author}</div>
-        <div>內容: {content}</div>
-        <div>目前價值: {currentValue}</div>
-        <button onClick={() => toggleEditor(id, true)}>購買</button>
-      </div>
+      
+        <article className="single_article">
+            <div className="content">
+                <p>{content}</p>
+                <div className="info">
+                    <div className="left">
+                        <p>當前價格：{currentValue} </p>
+                        <p className="author">作者：{author}</p>
+                        <p>最後編輯時間：2018/12/12 23:08</p>
+                    </div>
+                    <div className="right">
+                        <button className="btn btn_edit" onClick={() => toggleEditor(id, true)}>Edit</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+
     );
   }
 }
