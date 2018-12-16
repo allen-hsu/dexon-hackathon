@@ -215,27 +215,24 @@ export const getRank = () => {
     try {
       const state = getState();
       const contract = state.getIn(["book", "contract"]);
-      // const response = await contract.getStoryPartCount();
-      // const rankCount = response.toNumber();
-      const rankCount = 0;
+      const response = await contract.getLeaderboardCount();
+      const rankCount = response.toNumber();
       const rankList = [];
+      const keyList = [];
+      console.log("排行榜數量" + rankCount);
       for (let i = 0; i < rankCount; i++) {
-        // const response = await contract.leaderboard(i);
-        // console.log(response);
-        // const partInfo = {
-        //   id: response.id.toNumber(),
-        //   author: response.author.toString(),
-        //   currentValue: Number(response.currentValue.toString()),
-        //   color: response.color.toNumber(),
-        //   font: response.font.toNumber(),
-        //   content: response.content.toString(),
-        //   nextValue: Number(response.currentValue.toString()) * 1.5
-        // };
+        const key = await contract.leaderboardAddrs(i);
+        console.log(key.toString());
+        const leadBoard = await contract.leaderboard(key);
+        // keyList.push(key.toString());
 
-        // partList.push(partInfo);
-        const rankInfo = {};
-        rankList.push(rankList);
+        const rankInfo = {
+          address: key.toString(),
+          wordCount: leadBoard.toNumber()
+        };
+        rankList.push(rankInfo);
       }
+
       dispatch(updateRank(rankList));
 
       // if (start + count > storyCount) {

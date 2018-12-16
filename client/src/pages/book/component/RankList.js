@@ -5,17 +5,17 @@ import Rank from "./Rank";
 
 class RankList extends PureComponent {
   render() {
-    const { parts } = this.props;
-    console.log(parts);
+    const { leaderboard } = this.props;
+    console.log("排行榜資訊" + leaderboard);
     return (
       <div className="list_rate">
         <ul>
-          {parts.map((item, index) => {
+          {leaderboard.map((item, index) => {
             return (
               <Rank
-                key={item.id}
-                author={"排行榜作者"}
-                contentCount={"寫入內容"}
+                key={item.address}
+                author={item.address}
+                contentCount={item.wordCount}
                 currentValue={"數值"}
               />
             );
@@ -28,7 +28,7 @@ class RankList extends PureComponent {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    parts: state.getIn(["book", "parts"])
+    leaderboard: state.getIn(["book", "leaderboard"])
   };
 };
 

@@ -16,6 +16,7 @@ class ArticleList extends PureComponent {
                 id={item.id}
                 author={item.author}
                 content={item.content}
+                nextValue={item.nextValue}
                 currentValue={item.currentValue}
               />
             </div>
