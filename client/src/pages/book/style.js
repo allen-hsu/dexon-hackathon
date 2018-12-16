@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const BookWrapper = styled.div`
   position: relative;
   margin: 30px auto;
+  background-color: #777;
 `;
 
 export const BookLeft = styled.div`
