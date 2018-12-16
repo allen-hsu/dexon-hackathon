@@ -30,7 +30,8 @@ class Book extends PureComponent {
           <div className="top_info">
             <h1>Once Upon a Time...</h1>
             <div class="info">
-              總價值：163,423.5642 DEX • 已創作文字：2736238 • 獎池：22,271.8587
+              總價值：163,423.5642 DEX • 已創作文字：2736238 • 獎池：
+              {rewardPool}
               DEX • 進行中
             </div>
           </div>

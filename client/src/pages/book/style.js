@@ -2,14 +2,14 @@ import styled from "styled-components";
 import bg from "../../statics/images/bg.jpg";
 
 export const BookWrapper = styled.div`
-  /* background-image: url(${bg});
+  background-image: url(${bg});
   background-size: cover;
   background-position: center center;
   position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
-  left: 0; */
+  left: 0;
 `;
 
 export const BookLeft = styled.div`
