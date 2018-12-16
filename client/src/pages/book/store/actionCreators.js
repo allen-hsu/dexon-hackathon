@@ -26,6 +26,19 @@ const updateStoryPart = parts => ({
   parts
 });
 
+const toggleEditorValue = (currentEditorId, toggleEditor) => ({
+  type: constants.TOGGLE_EDITOR,
+  currentEditorId,
+  toggleEditor
+});
+
+const updateEditorValue = (currentEditorId, updateEditorContent) => ({
+  type: constants.UPDATE_EDITOR_VALUE,
+  currentEditorId,
+  updateEditorContent,
+  toggleEditor: false
+});
+
 export const authWeb3Action = () => {
   return async dispatch => {
     try {
@@ -38,6 +51,32 @@ export const authWeb3Action = () => {
       dispatch(authWeb3(web3, accounts, instance));
     } catch (error) {
       // Catch any errors for any of the above operations.
+      console.log(error);
+    }
+  };
+};
+
+export const buyStoryPart = (partId, color, font, content, nextValue) => {
+  return async (dispatch, getState) => {
+    try {
+      const state = getState();
+      const accounts = state.getIn(["book", "accounts"]);
+      const contract = state.getIn(["book", "contract"]);
+      console.log(accounts.get(0));
+      console.log("購買id : " + partId);
+      console.log("購買顏色 : " + color);
+      console.log("購買字型 : " + font);
+      console.log("購買內容 : " + content);
+      console.log("購買價錢 : " + nextValue);
+      contract
+        .buyStoryPart(partId, color, font, content, {
+          from: accounts.get(0),
+          value: nextValue
+        })
+        .on("transactionHash", async function(hash) {
+          console.log("購買成功");
+        });
+    } catch (error) {
       console.log(error);
     }
   };
@@ -63,6 +102,18 @@ export const setStorageValue = value => {
   };
 };
 
+export const toggleEditor = (id, value) => {
+  return (dispatch, getState) => {
+    dispatch(toggleEditorValue(id, value));
+  };
+};
+
+export const updateEditor = (id, content) => {
+  return (dispatch, getState) => {
+    dispatch(updateEditorValue(id, content));
+  };
+};
+
 export const getCurrentReward = () => {
   return async (dispatch, getState) => {
     try {
@@ -70,7 +121,7 @@ export const getCurrentReward = () => {
       const accounts = state.getIn(["book", "accounts"]);
       const contract = state.getIn(["book", "contract"]);
       const response = await contract.rewardPool();
-      dispatch(updateReward(response.toNumber()));
+      dispatch(updateReward(Number(response.toString())));
     } catch (error) {
       console.log(error);
     }
@@ -98,23 +149,16 @@ export const getStoryPart = (start, count) => {
             currentValue: Number(response.currentValue.toString()),
             color: response.color.toNumber(),
             font: response.font.toNumber(),
-            content: response.content.toString()
+            content: response.content.toString(),
+            nextValue: Number(response.currentValue.toString()) * 1.5
           };
 
           partList.push(partInfo);
         }
         dispatch(updateStoryPart(partList));
-        console.log(partList);
       }
     } catch (error) {
       console.log(error);
     }
-  };
-};
-
-export const getLastValue = id => {
-  return async dispatch => {
-    // const testState = state.getIn(["auth"]);
-    // console.log(testState);
   };
 };

@@ -12,10 +12,9 @@ import {
 import Page from "./component/Page";
 import ArticleList from "./component/ArticleList";
 import RankList from "./component/RankList";
+import Edit from "./component/Editor";
 import { actionCreators } from "./store";
 import { from } from "rxjs";
-
-
 
 import img_ico_wincup from "../../statics/images/ico_wincup.png";
 
@@ -26,7 +25,7 @@ class Book extends PureComponent {
     this.init = false;
   }
   render() {
-    const { web3States, rewardPool } = this.props;
+    const { web3States, rewardPool, toggleEditor } = this.props;
     if (web3States) {
       return (
         <BookWrapper>
@@ -36,7 +35,7 @@ class Book extends PureComponent {
 
           <div className="top_info">
             <h1>Once Upon a Time...</h1>
-            <div className="info">總價值：163,423.5642 DEX   •   已創作文字：2736238   •   獎池：22,271.8587 DEX   •   進行中</div>    
+            <div className="info">總價值：163,423.5642 DEX   •   已創作文字：2736238   •   獎池： {rewardPool} DEX   •   進行中</div>    
           </div>
 
           {/* 跳出編輯器 */}
@@ -158,6 +157,7 @@ class Book extends PureComponent {
           <BookRight>
             <div>右邊</div>
           </BookRight>
+          {toggleEditor ? <Edit /> : null}
         </BookWrapper>
       );
     } else {
@@ -187,7 +187,9 @@ const mapStateToProps = state => ({
   web3States: state.getIn(["book", "web3"]),
   storageValue: state.getIn(["book", "storageValue"]),
   rewardPool: state.getIn(["book", "rewardPool"]),
-  parts: state.getIn(["book", "parts"])
+  parts: state.getIn(["book", "parts"]),
+  toggleEditor: state.getIn(["book", "toggleEditor"]),
+  currentEditorId: state.getIn(["book", "currentEditorId"])
 });
 
 const mapDispathToProps = (dispatch, ownProps) => ({

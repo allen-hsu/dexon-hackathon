@@ -10,11 +10,12 @@ class ArticleList extends PureComponent {
       <div>
         {parts.map((item, index) => {
           return (
-            <div key={item.get("id")}>
+            <div key={item.id}>
               <Article
-                author={item.get("author")}
-                content={item.get("content")}
-                currentValue={item.get("currentValue")}
+                id={item.id}
+                author={item.author}
+                content={item.content}
+                currentValue={item.currentValue}
               />
             </div>
           );

@@ -7,3 +7,6 @@ export const GET_FONT = "book/GET_COLOR";
 export const UPDATE_STORAGE_VALUE = "book/UPDATE_STORAGE_VALUE";
 export const UPDATE_REWARD_VALUE = "book/UPDATE_REWARD_VALUE";
 export const UPDATE_STORY_PART_VALUE = "book/UPDATE_STORY_PART_VALUE";
+export const BUY_STORY_PART = "book/BUY_STORY_PART";
+export const TOGGLE_EDITOR = "book/TOGGLE_EDITOR";
+export const UPDATE_EDITOR_VALUE = "book/UPDATE_EDITOR_VALUE";
