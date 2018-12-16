@@ -223,6 +223,18 @@ b {
       height: calc( 80vh - 50px );;
       max-height: 400px;
       padding: 25px 50px;
+      .author {
+        white-space: pre;
+        text-overflow : ellipsis;
+        overflow: hidden;
+      }
+      p {
+        line-height: 1.4;
+        font-weight:400;
+        .tt{
+          color: #753f1c;
+        }
+      }
       .box {
           font-size: 20px;
           line-height: 1.7;
@@ -307,6 +319,7 @@ b {
           .left {
               width: 70%;
               float: left;
+              margin-top:10px;
           }
 
           .right {

@@ -23,15 +23,14 @@ class Editor extends PureComponent {
       <EditorWrapper>
         <EditorContainer>
           
-          <div id="popup_book" className="popup_book" >
+          <div className="popup_book" >
             <div className="editor">
                 {/* <div className="box" contentEditable="true"> */}
                 <textarea className="box">{content}</textarea>
                 <div className="left">
-                    當前價格: {currentValue} dex <br/>
-                    購買價錢: {nextValue} dex <br/>
-                    作者: {author} <br/>
-                    最後編輯時間: 2018/12/12 23:08 <br/>
+                    <p><span className="tt">當前價格</span> {currentValue} dex </p>
+                    <p><span className="tt">購買價錢</span> {nextValue} dex</p>
+                    <p className="author tt"><span className="tt">作者</span> {author}</p>
                     
                 </div>
                 <div className="right">

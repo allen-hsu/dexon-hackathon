@@ -14,7 +14,6 @@ class Article extends PureComponent {
                     <div className="left">
                         <p>當前價格：{currentValue} </p>
                         <p className="author">作者：{author}</p>
-                        <p>最後編輯時間：2018/12/12 23:08</p>
                     </div>
                     <div className="right">
                         <button className="btn btn_edit" onClick={() => toggleEditor(id, true)}>Edit</button>
