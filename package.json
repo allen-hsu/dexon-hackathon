@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@dexon-foundation/truffle": "^4.1.16",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
     "truffle-hdwallet-provider": "github:trufflesuite/truffle-hdwallet-provider"
   }
 }

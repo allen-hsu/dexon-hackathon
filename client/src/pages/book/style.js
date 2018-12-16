@@ -13,6 +13,21 @@ export const BookWrapper = styled.div`
 
 `;
 
+export const BookLeft = styled.div`
+  position: relative;
+  margin: 30px auto;
+`;
+
+export const BookRight = styled.div`
+  position: relative;
+  margin: 30px auto;
+`;
+
+export const BookCenter = styled.div`
+  position: relative;
+  margin: 30px auto;
+`;
+
 export const PageWrapper = styled.div`
   position: relative;
   margin: 30px auto;
@@ -45,7 +60,6 @@ export const PageBox = styled.div`
   height: 100%;
   background-size: contain;
 `;
-
 
 export const PageItem = styled.div`
   cursor: pointer;
@@ -97,26 +111,12 @@ export const ItemBack = styled(Common)`
   transform: rotateY(180deg);
 `;
 
-// export const Header = styled.div`
-//   margin: 50px 0 20px 0;
-//   line-height: 44px;
-//   font-size: 34px;
-//   color: #333;
-//   font-weight: bold;
-// `;
+export const ArticleWrapper = styled.div`
+  margin: 0px auto;
+`;
 
-// export const Content = styled.div`
-//   color: #2f2f2f;
-//   img {
-//     width: 100%;
-//   }
-//   p {
-//     margin: 25px 0;
-//     color: #222;
-//     font-size: 16px;
-//     line-height: 30px;
-//   }
-//   b {
-//     font-weight: bold;
-//   }
-// `;
+export const ArticleListWrapper = styled.div`
+  overflow: hidden;
+  width: 1280px;
+  margin: 0 auto;
+`;
