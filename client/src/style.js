@@ -1,5 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
+import img_btn_rightleft from "./statics/images/btn_rightleft.png";
+import img_btn_edit from "./statics/images/btn_edit.png";
+import img_btn_buy from "./statics/images/btn_buy.png";
+
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
   v2.0 | 20110126
@@ -91,6 +95,7 @@ b {
       font-weight: 300;
       cursor: pointer;
       margin: 10px 0;
+      font-size:24px;
   }
 }
 .leader_board {
@@ -109,6 +114,7 @@ b {
       font-weight: 300;
       cursor: pointer;
       margin: 10px 0;
+      font-size:24px;
   }
   i.flipy {
       -moz-transform:scaleY(-1);
@@ -142,6 +148,174 @@ b {
   }
 }
 
+
+.btn {
+  &.click_prev,
+  &.click_next {
+      display: block;
+      position: absolute;
+      bottom: 50px;
+      width: 112px;
+      height: 112px;
+      background-image: url(${img_btn_rightleft});
+      cursor: pointer;
+  }
+  &.click_prev {
+      background-position: left top;
+      left: -6vw;
+      &:hover {
+          background-position: left bottom;
+      }
+  }
+  &.click_next {
+      background-position: right top;
+      right: -6vw;
+      &:hover {
+          background-position: right bottom;
+      }
+  }
+  
+}
+
+.btn_edit {
+  background-image: url(${img_btn_edit});
+  width: 124px;
+  height: 56px;
+  background-position: left top;
+  overflow: hidden;
+  margin-top: 10px;
+  line-height: 56px;
+  text-align: center;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+
+  &:hover {
+      background-position: left bottom;
+  }
+}
+.btn_buy {
+  background-size: 100%;
+  background-image: url(${img_btn_buy});
+  &:hover {
+      background-position: left bottom;
+  }
+}
+
+.popup_book {
+  display: none;
+  background-color: rgba(0,0,0,.7);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  .editor {
+      background-color: rgba(233,218,184,.9);
+      width: calc( 70vw - 100px );
+      max-width: 700px;
+      height: calc( 80vh - 50px );;
+      max-height: 400px;
+      padding: 25px 50px;
+      .box {
+          font-size: 20px;
+          line-height: 1.7;
+          background-color: rgba(255,255,255,.5);
+          width: calc(100% - 30px) ;
+          height: 270px;
+          margin-bottom: 15px;
+          padding: 15px;
+      }
+  }
+  .left {
+      float: left;
+      width: 43%;
+  }
+  .right {
+      float: right;
+      .btn_edit {
+          float: right;
+          margin: 0 3px;
+      }
+  }
+}
+
+.book_area {
+  position: relative;
+  margin: 30px auto 0;
+  width: 77vw;
+  height: 48vw;
+  max-width: 1320px;
+  background-size: contain;
+  background-color: red;
+}
+
+.one_page {
+  width: calc( 50% - 50px );
+  float: left;
+  &.left {
+      margin-left: 50px;
+  }
+  &.right {
+      margin-right: 50px;
+  }
+  .single_article {
+  padding: 3vw 1.5vw 0;
+  font-size: 17px;
+  line-height: 1.6;
+
+  .content {
+      position: relative;
+      padding: 5px 10px;
+      border: 2px solid rgba(0, 0, 0, 0);
+      transition: all .5s;
+      min-height: 230px;
+
+      &.load {
+          position: static;
+      }
+
+      &:hover {
+          border: 2px solid #582b74;
+
+          .info {
+              opacity: 1;
+          }
+      }
+
+      .info {
+          opacity: 0;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: calc(100% - 20px);
+          height: 70px;
+          transition: all .5s;
+          background-color: rgba(78, 29, 109, .8);
+          color: #fff;
+          font-size: 15px;
+          padding: 3px 10px;
+
+          .left {
+              width: 70%;
+              float: left;
+          }
+
+          .right {
+              width: 30%;
+              float: right;
+
+
+          }
+      }
+  }
+}
+
+}
   
   `;
 export default GlobalStyle;
