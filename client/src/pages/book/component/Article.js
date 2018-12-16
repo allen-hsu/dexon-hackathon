@@ -18,7 +18,7 @@ class Article extends PureComponent {
           <p>{content}</p>
           <div className="info">
             <div className="left">
-              <p>當前價格：{nextValue} </p>
+              <p>當前價格：{nextValue / 1000000000000000000} Dex </p>
               <p className="author">作者：{author}</p>
             </div>
             <div className="right">

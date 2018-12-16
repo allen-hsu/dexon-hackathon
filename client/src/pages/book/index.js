@@ -34,7 +34,7 @@ class Book extends PureComponent {
             <h1>Once Upon a Time...</h1>
             <div className="info">
               總價值：163,423.5642 DEX • 已創作文字：2736238 • 獎池：{" "}
-              {rewardPool} DEX • 進行中
+              {rewardPool / 1000000000000000000} DEX • 進行中
             </div>
           </div>
 
@@ -63,9 +63,9 @@ class Book extends PureComponent {
                 <div className="img_box">
                   <img src={img_ico_wincup} alt="" />
                   <div className="top_rate">
-                    <b>1. Xiakecat</b> <br />
-                    34,137 個字 <br />
-                    3,124.4850 Dex
+                    <b>No.1 Xiakecat</b> <br />
+                    擁有 88 個段落
+                    <br />
                   </div>
                 </div>
                 <RankList />

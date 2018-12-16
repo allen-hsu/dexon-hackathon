@@ -41,10 +41,12 @@ class Editor extends PureComponent {
               />
               <div className="left">
                 <p>
-                  <span className="tt">當前價格</span> {currentValue} dex{" "}
+                  <span className="tt">當前價格</span>{" "}
+                  {currentValue / 1000000000000000000} dex{" "}
                 </p>
                 <p>
-                  <span className="tt">購買價錢</span> {nextValue} dex
+                  <span className="tt">購買價錢</span>{" "}
+                  {nextValue / 1000000000000000000} dex
                 </p>
                 <p className="author tt">
                   <span className="tt">作者</span> {author}

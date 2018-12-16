@@ -10,7 +10,7 @@ class Rank extends PureComponent {
         <p>
           <b>{author}</b>
         </p>
-        <p>佔領{contentCount}個段落</p>
+        <p>擁有 {contentCount} 個段落</p>
       </li>
     );
   }
