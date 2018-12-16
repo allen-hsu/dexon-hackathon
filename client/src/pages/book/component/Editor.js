@@ -21,14 +21,26 @@ class Editor extends PureComponent {
     return (
       <EditorWrapper>
         <EditorContainer>
-          <div>
-            <div>作者: {author}</div>
-            <div>內容: {content}</div>
-            <div>目前價值: {currentValue}</div>
-            <button onClick={() => closeEditor()}>取消</button>
-            <button onClick={() => updateEditor()}>確認</button>
-            <button onClick={() => buyStoryPart(this.props)}>購買</button>
+          
+          <div id="popup_book" className="popup_book" >
+            <div className="editor">
+                {/* <div className="box" contentEditable="true"> */}
+                <textarea className="box">{content}</textarea>
+                <div className="left">
+                    當前價格: {currentValue} dex <br/>
+                    作者: {author} <br/>
+                    最後編輯時間: 2018/12/12 23:08 <br/>
+                </div>
+                <div className="right">
+                    <div id="b_buy" className="btn btn_edit btn_buy">Buy</div>
+                    <div id="b_ok" className="btn btn_edit">Buy</div>
+                    <div id="b_cancel" className="btn btn_edit ">Cancel</div>
+                </div>
+            </div>
           </div>
+
+
+
         </EditorContainer>
       </EditorWrapper>
     );
