@@ -18,7 +18,6 @@ import { from } from "rxjs";
 
 import img_ico_wincup from "../../statics/images/ico_wincup.png";
 
-
 class Book extends PureComponent {
   constructor(props) {
     super(props);
@@ -29,40 +28,43 @@ class Book extends PureComponent {
     if (web3States) {
       return (
         <BookWrapper>
-          
-          
-          
-
           <div className="top_info">
             <h1>Once Upon a Time...</h1>
-            <div className="info">總價值：163,423.5642 DEX   •   已創作文字：2736238   •   獎池： {rewardPool} DEX   •   進行中</div>    
+            <div className="info">
+              總價值：163,423.5642 DEX • 已創作文字：2736238 • 獎池：{" "}
+              {rewardPool} DEX • 進行中
+            </div>
           </div>
 
           {/* 跳出編輯器 */}
-          <div id="popup_book" className="popup_book" >
+          <div id="popup_book" className="popup_book">
             <div className="editor">
-                {/* <div className="box" contentEditable="true"> */}
-                <textarea className="box">
-                    
-                </textarea>
-                <div className="left">
-                    當前價格: 9.533 dex <br/>
-                    作者: God's right hand <br/>
-                    最後編輯時間: 2018/12/12 23:08 <br/>
+              {/* <div className="box" contentEditable="true"> */}
+              <textarea className="box" />
+              <div className="left">
+                當前價格: 9.533 dex <br />
+                作者: God's right hand <br />
+                最後編輯時間: 2018/12/12 23:08 <br />
+              </div>
+              <div className="right">
+                <div id="b_buy" className="btn btn_edit btn_buy">
+                  Buy
                 </div>
-                <div className="right">
-                    <div id="b_buy" className="btn btn_edit btn_buy">Buy</div>
-                    <div id="b_ok" className="btn btn_edit">Ok</div>
-                    <div id="b_cancel" className="btn btn_edit ">Cancel</div>
+                <div id="b_ok" className="btn btn_edit">
+                  Ok
                 </div>
+                <div id="b_cancel" className="btn btn_edit ">
+                  Cancel
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
 
           {/* 書本 */}
           <PageWrapper>
-            <div className="btn click_prev"></div>
-            <div className="btn click_next"></div>
-            <div className="one_page ">           
+            <div className="btn click_prev" />
+            <div className="btn click_next" />
+            <div className="one_page ">
               <ArticleList />
             </div>
           </PageWrapper>
@@ -70,21 +72,23 @@ class Book extends PureComponent {
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
             <div className="leader_board">
-              <h2>排行榜 <i className="fa fa-angle-down" aria-hidden="true"></i></h2>
+              <h2>
+                排行榜 <i className="fa fa-angle-down" aria-hidden="true" />
+              </h2>
               <div>
-                  <div className="img_box">
-                    <img src={img_ico_wincup} alt="" />
-                    <div className="top_rate">
-                        <b>1. Xiakecat</b> <br/>
-                        34,137 個字 <br/>
-                        3,124.4850 Dex
-                    </div>
+                <div className="img_box">
+                  <img src={img_ico_wincup} alt="" />
+                  <div className="top_rate">
+                    <b>1. Xiakecat</b> <br />
+                    34,137 個字 <br />
+                    3,124.4850 Dex
                   </div>
-                  <RankList />
+                </div>
+                <RankList />
               </div>
             </div>
             <div className="help_board">
-                <h2>幫助 </h2>
+              <h2>幫助 </h2>
             </div>
           </BookLeft>
           <BookCenter>
@@ -96,24 +100,60 @@ class Book extends PureComponent {
           <BookRight>
             <div>右邊</div>
           </BookRight>
-          {toggleEditor ? <Edit /> : null}
+          {this.getEditorInfo()}
         </BookWrapper>
       );
     } else {
       return <div>沒有Web3 loding</div>;
     }
   }
+
+  getEditorInfo() {
+    const { toggleEditor, parts, currentEditorId } = this.props;
+    const currentEditorPart = parts[currentEditorId];
+    console.log(currentEditorId);
+    console.log(currentEditorPart);
+    if (toggleEditor) {
+      return (
+        <Edit
+          author={currentEditorPart.author}
+          content={currentEditorPart.content}
+          currentValue={currentEditorPart.currentValue}
+          nextValue={currentEditorPart.nextValue}
+        />
+      );
+    } else {
+      return null;
+    }
+  }
+
   componentDidUpdate() {
-    const { web3States, getCurrentReward, getStoryPart } = this.props;
+    const {
+      web3States,
+      getCurrentReward,
+      getStoryPart,
+      updateAllInfo,
+      getRank,
+      closeUpdateInfo
+    } = this.props;
     if (!this.init) {
       if (web3States) {
         console.log("初始化成功");
         getStoryPart(0, 10);
         getCurrentReward();
+        getRank();
       } else {
         console.log("初始化失敗");
       }
       this.init = true;
+    }
+
+    if (updateAllInfo) {
+      console.log("更新摟~~");
+      closeUpdateInfo();
+      getStoryPart(0, 10);
+      getCurrentReward();
+      getRank();
     }
   }
 
@@ -128,7 +168,8 @@ const mapStateToProps = state => ({
   rewardPool: state.getIn(["book", "rewardPool"]),
   parts: state.getIn(["book", "parts"]),
   toggleEditor: state.getIn(["book", "toggleEditor"]),
-  currentEditorId: state.getIn(["book", "currentEditorId"])
+  currentEditorId: state.getIn(["book", "currentEditorId"]),
+  updateAllInfo: state.getIn(["book", "updateAllInfo"])
 });
 
 const mapDispathToProps = (dispatch, ownProps) => ({
@@ -146,6 +187,14 @@ const mapDispathToProps = (dispatch, ownProps) => ({
 
   getStoryPart(start, count) {
     dispatch(actionCreators.getStoryPart(start, count));
+  },
+
+  getRank() {
+    dispatch(actionCreators.getRank());
+  },
+
+  closeUpdateInfo() {
+    dispatch(actionCreators.closeUpdateInfo());
   }
 });
 

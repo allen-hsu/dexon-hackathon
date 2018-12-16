@@ -11,7 +11,9 @@ const defaultState = fromJS({
   pagePartCount: 1, //目前總共顯示多少故事
   toggleEditor: false, //目前編輯器頁面是否打開
   currentEditorId: 0, //目前編輯哪一個故事
-  updateEditorContent: "" //編輯後故事的結果
+  updateEditorContent: "", //編輯後故事的結果
+  updateAllInfo: false,
+  leaderboard: [] //排行榜
 });
 
 const authWeb3 = (state, action) => {
@@ -49,6 +51,10 @@ export default (state = defaultState, action) => {
       });
     case constants.UPDATE_EDITOR_VALUE:
       return updateEditorValue(state, action);
+    case constants.UPDATE_RANK_VALUE:
+      return state.set("leaderboard", action.leaderboard);
+    case constants.TOGGLE_UPDATE_INFO:
+      return state.set("updateAllInfo", action.updateAllInfo);
     default:
       return state;
   }

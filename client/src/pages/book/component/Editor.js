@@ -10,6 +10,7 @@ class Editor extends PureComponent {
       author,
       content,
       currentValue,
+      nextValue,
       currentEditorId,
       updateEditor,
       closeEditor,
@@ -28,13 +29,15 @@ class Editor extends PureComponent {
                 <textarea className="box">{content}</textarea>
                 <div className="left">
                     當前價格: {currentValue} dex <br/>
+                    購買價錢: {nextValue} dex <br/>
                     作者: {author} <br/>
                     最後編輯時間: 2018/12/12 23:08 <br/>
+                    
                 </div>
                 <div className="right">
-                    <div id="b_buy" className="btn btn_edit btn_buy">Buy</div>
-                    <div id="b_ok" className="btn btn_edit">Buy</div>
-                    <div id="b_cancel" className="btn btn_edit ">Cancel</div>
+                    <div onClick={() => buyStoryPart(this.props)} className="btn btn_edit btn_buy">Buy</div>
+                    <div onClick={() => updateEditor()} className="btn btn_edit">Ok</div>
+                    <div onClick={() => closeEditor()} className="btn btn_edit ">Cancel</div>
                 </div>
             </div>
           </div>
