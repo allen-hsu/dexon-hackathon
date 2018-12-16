@@ -24,6 +24,10 @@ class Book extends PureComponent {
     if (web3States) {
       return (
         <BookWrapper>
+           <div className="top_info">
+          <h1>Once Upon a Time...</h1>
+          <div class="info">總價值：163,423.5642 DEX   •   已創作文字：2736238   •   獎池：22,271.8587 DEX   •   進行中</div>    
+        </div>  
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
             <div>排行綁</div>
