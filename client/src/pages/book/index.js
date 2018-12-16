@@ -90,7 +90,7 @@ class Book extends PureComponent {
     } else {
       return (
         <BookWrapper>
-        <div className="wait">等待錢包區塊鏈中...</div>
+          <div className="wait">等待錢包區塊鏈中...</div>
         </BookWrapper>
       );
     }
@@ -163,9 +163,9 @@ class Book extends PureComponent {
     if (updateAllInfo) {
       console.log("更新摟~~");
       closeUpdateInfo();
-      getStoryPart(currentPageIndex, 4);
-      getCurrentReward();
-      getRank();
+      // getStoryPart(currentPageIndex, 4);
+      // getCurrentReward();
+      // getRank();
     }
   }
 
