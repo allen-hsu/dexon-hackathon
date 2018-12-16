@@ -35,6 +35,9 @@ contract Book
     
     // public 排行榜 (作者錢包地址與貢獻段落數量)
     mapping(address => uint32) public leaderboard;
+    address[] public leaderboardAddrs;
+    mapping(address => bool) inLeaderboard;
+    //uint32 leaderboardCount = 0;
     
     // public 已結束編輯了嗎，若結束編輯則所有會更動資料的功能都不能用
     bool public isEnd = false;
@@ -56,7 +59,6 @@ contract Book
 
 //region buy function    
       
-
     function set(uint x) public payable {
         storedData = x;
     }
@@ -105,9 +107,10 @@ contract Book
         //交易成立，更改段落
         StoryPart memory part = StoryPart(partID, msg.sender, value, color, font, content, block.timestamp);
         parts[partID] = part;
+        
         //更新排行榜
-        leaderboard[msg.sender] ++;
-        if(lastAuthor != owner) leaderboard[lastAuthor] --;
+        updateLeaderboard();
+        
         //發送更動段落的通知
         emit storyUpdated(partID, msg.sender, value, color, font, content);
     }
@@ -127,9 +130,18 @@ contract Book
 //endregion
     
 //region get function
-    function getStoryPartCount() public view returns(uint256) {
+    // 取得排行榜數量
+    function getLeaderboardCount()public view returns(uint256) 
+    {
+        return leaderboardAddrs.length;
+    }
+
+    // 故事段落總數
+    function getStoryPartCount() public view returns(uint256) 
+    {
         return parts.length;
     }
+    
     // 輸入故事段落編號，取得該段落上次出價金額
     function getLastValueByID(uint32 partID) public view returns(uint256)
     {
@@ -162,6 +174,33 @@ contract Book
 //endregion
 
 //region private function   
+    // 更新排行榜
+    function updateLeaderboard() private
+    {
+        delete leaderboardAddrs;
+        
+        for(uint32 i = 0; i < totalPart ; i++)
+        {
+            address addr = parts[i].author;
+            leaderboard[addr] = 0;
+            inLeaderboard[addr] = false;
+        }
+        
+        for(i = 0; i < totalPart ; i++)
+        {
+            addr = parts[i].author;
+            if(addr != owner)
+            {
+                leaderboard[addr] ++;
+                if(!inLeaderboard[addr])
+                {
+                    inLeaderboard[addr] = true;
+                    leaderboardAddrs.push(addr);
+                }
+            }
+        }
+    }
+
     // 初始化所有段落
     function init () private
     {
