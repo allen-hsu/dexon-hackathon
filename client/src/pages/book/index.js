@@ -1,11 +1,19 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { BookWrapper } from "./style";
+import {
+  BookWrapper,
+  BookLeft,
+  BookCenter,
+  BookRight,
+  ArticleListWrapper
+} from "./style";
 import Page from "./component/Page";
 import ArticleList from "./component/ArticleList";
+import RankList from "./component/RankList";
 import { actionCreators } from "./store";
 import { from } from "rxjs";
+
 class Book extends PureComponent {
   constructor(props) {
     super(props);
@@ -15,10 +23,22 @@ class Book extends PureComponent {
     const { web3States, rewardPool } = this.props;
     if (web3States) {
       return (
-        <div>
+        <BookWrapper>
           <div>目前獎金{rewardPool}</div>
-          <ArticleList />
-        </div>
+          <BookLeft>
+            <div>排行榜</div>
+            <RankList />
+          </BookLeft>
+          <BookCenter>
+            <div>中間</div>
+            <div>
+              <ArticleList />
+            </div>
+          </BookCenter>
+          <BookRight>
+            <div>右邊</div>
+          </BookRight>
+        </BookWrapper>
       );
     } else {
       return <div>沒有Web3 loding</div>;

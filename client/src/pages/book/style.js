@@ -1,6 +1,28 @@
 import styled from "styled-components";
+import bg from "../../statics/images/bg.jpg";
 
 export const BookWrapper = styled.div`
+  background-image: url(${bg});
+  background-size: cover;
+  background-position: center center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+`;
+
+export const BookLeft = styled.div`
+  position: relative;
+  margin: 30px auto;
+`;
+
+export const BookRight = styled.div`
+  position: relative;
+  margin: 30px auto;
+`;
+
+export const BookCenter = styled.div`
   position: relative;
   margin: 30px auto;
 `;
@@ -38,59 +60,61 @@ export const PageBox = styled.div`
   background-size: contain;
 `;
 
-
 export const PageItem = styled.div`
-    cursor: pointer;
-    position: absolute;
-    color: black;
-    width: 100 % ;
-    height: 100 % ;
-    webkit - transition: 1.5 s - webkit - transform;
-    transition: 1.5 s transform; -
-    webkit - transform - style: preserve - 3 d;
-    transform - style: preserve - 3 d; -
-    webkit - transform - origin: left center; -
-    ms - transform - origin: left center;
-    transform - origin: left center;
-    background-color: red;
-    .front,
-    .back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
+  cursor: pointer;
+  position: absolute;
+  color: black;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 1.5s -webkit-transform;
+  transition: 1.5s transform;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: left center;
+  -ms-transform-origin: left center;
+  transform-origin: left center;
+  &.big {
+    width: 106%;
+    top: -2.5%;
+  }
 
-    .back {
-        -webkit-transform: rotateY(180deg);
-        transform: rotateY(180deg);
-    }
+  &.active {
+    z-index: 1;
+  }
+
+  &.flipped {
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+  }
+
+  &.flipped:last-of-type {
+    z-index: 1;
+  }
 `;
 
-// export const Header = styled.div`
-//   margin: 50px 0 20px 0;
-//   line-height: 44px;
-//   font-size: 34px;
-//   color: #333;
-//   font-weight: bold;
-// `;
+const Common = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+`;
 
-// export const Content = styled.div`
-//   color: #2f2f2f;
-//   img {
-//     width: 100%;
-//   }
-//   p {
-//     margin: 25px 0;
-//     color: #222;
-//     font-size: 16px;
-//     line-height: 30px;
-//   }
-//   b {
-//     font-weight: bold;
-//   }
-// `;
+export const ItemFront = styled(Common)``;
+export const ItemBack = styled(Common)`
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+`;
+
+export const ArticleWrapper = styled.div`
+  margin: 0px auto;
+`;
+
+export const ArticleListWrapper = styled.div`
+  overflow: hidden;
+  width: 1280px;
+  margin: 0 auto;
+`;
