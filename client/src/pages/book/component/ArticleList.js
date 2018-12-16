@@ -6,6 +6,7 @@ import Article from "./Article";
 class ArticleList extends PureComponent {
   render() {
     const { parts } = this.props;
+    console.log(parts);
     return (
       <div>
         {parts.map((item, index) => {

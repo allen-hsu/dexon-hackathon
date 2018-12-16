@@ -21,9 +21,15 @@ const updateReward = rewardPool => ({
   rewardPool
 });
 
-const updateStoryPart = parts => ({
+const updateTotlaPartCount = totalPartCount => ({
+  type: constants.GET_TOTAL_PART_COUNT,
+  totalPartCount
+});
+
+const updateStoryPart = (parts, currentIndex) => ({
   type: constants.UPDATE_STORY_PART_VALUE,
-  parts
+  parts,
+  pagePartStart: currentIndex
 });
 
 const updateRank = rank => ({
@@ -156,6 +162,18 @@ export const getCurrentReward = () => {
   };
 };
 
+export const getStoryCount = () => {
+  return async (dispatch, getState) => {
+    try {
+      const state = getState();
+      const contract = state.getIn(["book", "contract"]);
+      const response = await contract.getStoryPartCount();
+      const storyCount = response.toNumber();
+      console.log(storyCount);
+      dispatch(updateTotlaPartCount(storyCount));
+    } catch (error) {}
+  };
+};
 export const getStoryPart = (start, count) => {
   return async (dispatch, getState) => {
     try {
@@ -163,12 +181,12 @@ export const getStoryPart = (start, count) => {
       const contract = state.getIn(["book", "contract"]);
       const response = await contract.getStoryPartCount();
       const storyCount = response.toNumber();
-
-      if (start + count > storyCount) {
+      const end = start + count;
+      if (end > storyCount) {
         console.log("出錯了喔");
       } else {
         const partList = [];
-        for (let i = start; i < count; i++) {
+        for (let i = start; i < end; i++) {
           const response = await contract.parts(i);
 
           const partInfo = {
@@ -183,7 +201,8 @@ export const getStoryPart = (start, count) => {
 
           partList.push(partInfo);
         }
-        dispatch(updateStoryPart(partList));
+        console.log("更新的partList :" + partList);
+        dispatch(updateStoryPart(partList, start));
       }
     } catch (error) {
       console.log(error);
