@@ -10,6 +10,7 @@ class Editor extends PureComponent {
       author,
       content,
       currentValue,
+      nextValue,
       currentEditorId,
       updateEditor,
       closeEditor,
@@ -21,14 +22,27 @@ class Editor extends PureComponent {
     return (
       <EditorWrapper>
         <EditorContainer>
-          <div>
-            <div>作者: {author}</div>
-            <div>內容: {content}</div>
-            <div>目前價值: {currentValue}</div>
-            <button onClick={() => closeEditor()}>取消</button>
-            <button onClick={() => updateEditor()}>確認</button>
-            <button onClick={() => buyStoryPart(this.props)}>購買</button>
+          
+          <div className="popup_book" >
+            <div className="editor">
+                {/* <div className="box" contentEditable="true"> */}
+                <textarea className="box">{content}</textarea>
+                <div className="left">
+                    <p><span className="tt">當前價格</span> {currentValue} dex </p>
+                    <p><span className="tt">購買價錢</span> {nextValue} dex</p>
+                    <p className="author tt"><span className="tt">作者</span> {author}</p>
+                    
+                </div>
+                <div className="right">
+                    <div onClick={() => buyStoryPart(this.props)} className="btn btn_edit btn_buy">Buy</div>
+                    <div onClick={() => updateEditor()} className="btn btn_edit">Ok</div>
+                    <div onClick={() => closeEditor()} className="btn btn_edit ">Cancel</div>
+                </div>
+            </div>
           </div>
+
+
+
         </EditorContainer>
       </EditorWrapper>
     );

@@ -8,10 +8,13 @@ const defaultState = fromJS({
   rewardPool: 0, //獎金池
   parts: [], //故事段落,
   pagePartStart: 0, //目前顯示故事段落的開始點
-  pagePartCount: 1, //目前總共顯示多少故事
+  pagePartCount: 4, //目前總共顯示多少故事
   toggleEditor: false, //目前編輯器頁面是否打開
   currentEditorId: 0, //目前編輯哪一個故事
-  updateEditorContent: "" //編輯後故事的結果
+  updateEditorContent: "", //編輯後故事的結果
+  updateAllInfo: false,
+  leaderboard: [], //排行榜
+  totalPartCount: 0
 });
 
 const authWeb3 = (state, action) => {
@@ -41,7 +44,10 @@ export default (state = defaultState, action) => {
     case constants.UPDATE_REWARD_VALUE:
       return state.set("rewardPool", action.rewardPool);
     case constants.UPDATE_STORY_PART_VALUE:
-      return state.set("parts", action.parts);
+      return state.merge({
+        parts: action.parts,
+        pagePartStart: action.pagePartStart
+      });
     case constants.TOGGLE_EDITOR:
       return state.merge({
         toggleEditor: action.toggleEditor,
@@ -49,6 +55,12 @@ export default (state = defaultState, action) => {
       });
     case constants.UPDATE_EDITOR_VALUE:
       return updateEditorValue(state, action);
+    case constants.UPDATE_RANK_VALUE:
+      return state.set("leaderboard", action.leaderboard);
+    case constants.TOGGLE_UPDATE_INFO:
+      return state.set("updateAllInfo", action.updateAllInfo);
+    case constants.GET_TOTAL_PART_COUNT:
+      return state.set("totalPartCount", action.totalPartCount);
     default:
       return state;
   }

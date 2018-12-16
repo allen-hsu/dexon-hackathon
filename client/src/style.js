@@ -189,6 +189,8 @@ b {
   font-size: 24px;
   cursor: pointer;
   color: #fff;
+  background-color:rgba(0,0,0,0);
+  border:0;
 
   &:hover {
       background-position: left bottom;
@@ -221,6 +223,18 @@ b {
       height: calc( 80vh - 50px );;
       max-height: 400px;
       padding: 25px 50px;
+      .author {
+        white-space: pre;
+        text-overflow : ellipsis;
+        overflow: hidden;
+      }
+      p {
+        line-height: 1.4;
+        font-weight:400;
+        .tt{
+          color: #753f1c;
+        }
+      }
       .box {
           font-size: 20px;
           line-height: 1.7;
@@ -255,18 +269,14 @@ b {
 }
 
 .one_page {
-  width: calc( 50% - 50px );
-  float: left;
-  &.left {
-      margin-left: 50px;
-  }
-  &.right {
-      margin-right: 50px;
-  }
-  .single_article {
-  padding: 3vw 1.5vw 0;
-  font-size: 17px;
-  line-height: 1.6;
+  width: calc( 100% - 100px );
+    margin: 0 auto;
+    .single_article {
+        width: calc( 50% - 50px);
+        padding: 3vw 1.5vw 0;
+        font-size: 17px;
+        line-height: 1.6;
+        float: left;
 
   .content {
       position: relative;
@@ -300,9 +310,16 @@ b {
           font-size: 15px;
           padding: 3px 10px;
 
+          .author {
+            white-space: pre;
+            text-overflow : ellipsis;
+            overflow: hidden;
+          }
+
           .left {
               width: 70%;
               float: left;
+              margin-top:10px;
           }
 
           .right {

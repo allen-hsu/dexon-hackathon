@@ -17,7 +17,7 @@ import { actionCreators } from "./store";
 import { from } from "rxjs";
 
 import img_ico_wincup from "../../statics/images/ico_wincup.png";
-
+import { getStoryCount } from "./store/actionCreators";
 
 class Book extends PureComponent {
   constructor(props) {
@@ -25,127 +25,55 @@ class Book extends PureComponent {
     this.init = false;
   }
   render() {
-    const { web3States, rewardPool, toggleEditor } = this.props;
+    const { web3States, rewardPool } = this.props;
     if (web3States) {
       return (
         <BookWrapper>
-          
-          
-          
-
           <div className="top_info">
             <h1>Once Upon a Time...</h1>
-            <div className="info">總價值：163,423.5642 DEX   •   已創作文字：2736238   •   獎池： {rewardPool} DEX   •   進行中</div>    
+            <div className="info">
+              總價值：163,423.5642 DEX • 已創作文字：2736238 • 獎池：{" "}
+              {rewardPool} DEX • 進行中
+            </div>
           </div>
 
-          {/* 跳出編輯器 */}
-          <div id="popup_book" className="popup_book" >
-            <div className="editor">
-                {/* <div className="box" contentEditable="true"> */}
-                <textarea className="box">
-                    
-                </textarea>
-                <div className="left">
-                    當前價格: 9.533 dex <br/>
-                    作者: God's right hand <br/>
-                    最後編輯時間: 2018/12/12 23:08 <br/>
-                </div>
-                <div className="right">
-                    <div id="b_buy" className="btn btn_edit btn_buy">Buy</div>
-                    <div id="b_ok" className="btn btn_edit">Ok</div>
-                    <div id="b_cancel" className="btn btn_edit ">Cancel</div>
-                </div>
-            </div>
-        </div>
+         
 
           {/* 書本 */}
           <PageWrapper>
-            <div className="btn click_prev"></div>
-            <div className="btn click_next"></div>
-            <div className="one_page left">           
-              <article className="single_article">
-                    <div className="content">
-                        <p>第一筆：「為了讓人類有成功的生活，神提供了兩種管道：教育與運動」。而實際上這兩種管道是相輔相成，缺一不可。在幼兒的成長，健康是最重要的，也是最好的投資，運動就是健康的最佳選擇。迷你足球不只是運動，也是教育。研究發現，當一個人大量運動時會分泌多巴胺、血清素和正腎上腺素，這三種神經傳導物質都跟情緒與學習有關。多巴胺是種正向的情緒物質，人要快樂，大腦中一定要有多巴胺，這就是我們看到運動完的人心情都是。</p>
-                        <div className="info">
-                            <div className="left">
-                                <p>當前價格：9.533 dex </p>
-                                <p>作者：God's right hand</p>
-                                <p>最後編輯時間：2018/12/12 23:08</p>
-                            </div>
-                            <div className="right">
-                                <div className="btn btn_edit">Edit</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article className="single_article">
-                    <div className="content">
-                        <p>第一筆：「為了讓人類有成功的生活，神提供了兩種管道：教育與運動」。而實際上這兩種管道是相輔相成，缺一不可。在幼兒的成長，健康是最重要的，也是最好的投資，運動就是健康的最佳選擇。迷你足球不只是運動，也是教育。研究發現，當一個人大量運動時會分泌多巴胺、血清素和正腎上腺素，這三種神經傳導物質都跟情緒與學習有關。多巴胺是種正向的情緒物質，人要快樂，大腦中一定要有多巴胺，這就是我們看到運動完的人心情都是。</p>
-                        <div className="info">
-                            <div className="left">
-                                <p>當前價格：9.533 dex </p>
-                                <p>作者：God's right hand</p>
-                                <p>最後編輯時間：2018/12/12 23:08</p>
-                            </div>
-                            <div className="right">
-                                <div className="btn btn_edit">Edit</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div className="one_page right">           
-              <article className="single_article">
-                    <div className="content">
-                        <p>第一筆：「為了讓人類有成功的生活，神提供了兩種管道：教育與運動」。而實際上這兩種管道是相輔相成，缺一不可。在幼兒的成長，健康是最重要的，也是最好的投資，運動就是健康的最佳選擇。迷你足球不只是運動，也是教育。研究發現，當一個人大量運動時會分泌多巴胺、血清素和正腎上腺素，這三種神經傳導物質都跟情緒與學習有關。多巴胺是種正向的情緒物質，人要快樂，大腦中一定要有多巴胺，這就是我們看到運動完的人心情都是。</p>
-                        <div className="info">
-                            <div className="left">
-                                <p>當前價格：9.533 dex </p>
-                                <p>作者：God's right hand</p>
-                                <p>最後編輯時間：2018/12/12 23:08</p>
-                            </div>
-                            <div className="right">
-                                <div className="btn btn_edit">Edit</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article className="single_article">
-                    <div className="content">
-                        <p>第一筆：「為了讓人類有成功的生活，神提供了兩種管道：教育與運動」。而實際上這兩種管道是相輔相成，缺一不可。在幼兒的成長，健康是最重要的，也是最好的投資，運動就是健康的最佳選擇。迷你足球不只是運動，也是教育。研究發現，當一個人大量運動時會分泌多巴胺、血清素和正腎上腺素，這三種神經傳導物質都跟情緒與學習有關。多巴胺是種正向的情緒物質，人要快樂，大腦中一定要有多巴胺，這就是我們看到運動完的人心情都是。</p>
-                        <div className="info">
-                            <div className="left">
-                                <p>當前價格：9.533 dex </p>
-                                <p>作者：God's right hand</p>
-                                <p>最後編輯時間：2018/12/12 23:08</p>
-                            </div>
-                            <div className="right">
-                                <div className="btn btn_edit">Edit</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            <div
+              onClick={() => this.getPrevPageInfo()}
+              className="btn click_prev"
+            />
+            <div
+              onClick={() => this.getNextPageInfo()}
+              className="btn click_next"
+            />
+            <div className="one_page ">
+              <ArticleList />
             </div>
           </PageWrapper>
 
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
             <div className="leader_board">
-              <h2>排行榜 <i className="fa fa-angle-down" aria-hidden="true"></i></h2>
+              <h2>
+                排行榜 <i className="fa fa-angle-down" aria-hidden="true" />
+              </h2>
               <div>
-                  <div className="img_box">
-                    <img src={img_ico_wincup} alt="" />
-                    <div className="top_rate">
-                        <b>1. Xiakecat</b> <br/>
-                        34,137 個字 <br/>
-                        3,124.4850 Dex
-                    </div>
+                <div className="img_box">
+                  <img src={img_ico_wincup} alt="" />
+                  <div className="top_rate">
+                    <b>1. Xiakecat</b> <br />
+                    34,137 個字 <br />
+                    3,124.4850 Dex
                   </div>
-                  <RankList />
+                </div>
+                <RankList />
               </div>
             </div>
             <div className="help_board">
-                <h2>幫助 </h2>
+              <h2>幫助 </h2>
             </div>
           </BookLeft>
           <BookCenter>
@@ -157,24 +85,84 @@ class Book extends PureComponent {
           <BookRight>
             <div>右邊</div>
           </BookRight>
-          {toggleEditor ? <Edit /> : null}
+          {this.getEditorInfo()}
         </BookWrapper>
       );
     } else {
-      return <div>沒有Web3 loding</div>;
+      return <div>等待錢包區塊鏈中</div>;
     }
   }
+
+  getNextPageInfo() {
+    const { getStoryPart, currentPageIndex, totalPartCount } = this.props;
+    const nextIndex = currentPageIndex + 4;
+
+    if (nextIndex >= totalPartCount) {
+      console.log("超出範圍啦~~");
+      return;
+    }
+    console.log("更新下個頁面 : " + nextIndex);
+    getStoryPart(nextIndex, 4);
+  }
+
+  getPrevPageInfo() {
+    const { getStoryPart, currentPageIndex, totalPartCount } = this.props;
+
+    const nextIndex = currentPageIndex - 4;
+    if (nextIndex < 0) {
+      console.log("超出範圍啦~~");
+      return;
+    }
+    getStoryPart(nextIndex, 4);
+  }
+
+  getEditorInfo() {
+    const { toggleEditor, parts, currentEditorId } = this.props;
+    const currentEditorPart = parts[currentEditorId];
+    if (toggleEditor) {
+      return (
+        <Edit
+          author={currentEditorPart.author}
+          content={currentEditorPart.content}
+          currentValue={currentEditorPart.currentValue}
+          nextValue={currentEditorPart.nextValue}
+        />
+      );
+    } else {
+      return null;
+    }
+  }
+
   componentDidUpdate() {
-    const { web3States, getCurrentReward, getStoryPart } = this.props;
+    const {
+      web3States,
+      getCurrentReward,
+      getStoryPart,
+      updateAllInfo,
+      getRank,
+      closeUpdateInfo,
+      currentPageIndex,
+      getStoryCount
+    } = this.props;
     if (!this.init) {
       if (web3States) {
         console.log("初始化成功");
-        getStoryPart(0, 10);
+        getStoryPart(currentPageIndex, 4);
         getCurrentReward();
+        getStoryCount();
+        getRank();
       } else {
         console.log("初始化失敗");
       }
       this.init = true;
+    }
+
+    if (updateAllInfo) {
+      console.log("更新摟~~");
+      closeUpdateInfo();
+      getStoryPart(currentPageIndex, 4);
+      getCurrentReward();
+      getRank();
     }
   }
 
@@ -189,7 +177,10 @@ const mapStateToProps = state => ({
   rewardPool: state.getIn(["book", "rewardPool"]),
   parts: state.getIn(["book", "parts"]),
   toggleEditor: state.getIn(["book", "toggleEditor"]),
-  currentEditorId: state.getIn(["book", "currentEditorId"])
+  currentEditorId: state.getIn(["book", "currentEditorId"]),
+  updateAllInfo: state.getIn(["book", "updateAllInfo"]),
+  currentPageIndex: state.getIn(["book", "pagePartStart"]),
+  totalPartCount: state.getIn(["book", "totalPartCount"])
 });
 
 const mapDispathToProps = (dispatch, ownProps) => ({
@@ -207,6 +198,17 @@ const mapDispathToProps = (dispatch, ownProps) => ({
 
   getStoryPart(start, count) {
     dispatch(actionCreators.getStoryPart(start, count));
+  },
+
+  getRank() {
+    dispatch(actionCreators.getRank());
+  },
+
+  closeUpdateInfo() {
+    dispatch(actionCreators.closeUpdateInfo());
+  },
+  getStoryCount() {
+    dispatch(actionCreators.getStoryCount());
   }
 });
 

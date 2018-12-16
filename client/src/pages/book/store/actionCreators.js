@@ -21,9 +21,20 @@ const updateReward = rewardPool => ({
   rewardPool
 });
 
-const updateStoryPart = parts => ({
+const updateTotlaPartCount = totalPartCount => ({
+  type: constants.GET_TOTAL_PART_COUNT,
+  totalPartCount
+});
+
+const updateStoryPart = (parts, currentIndex) => ({
   type: constants.UPDATE_STORY_PART_VALUE,
-  parts
+  parts,
+  pagePartStart: currentIndex
+});
+
+const updateRank = rank => ({
+  type: constants.UPDATE_RANK_VALUE,
+  leaderboard: rank
 });
 
 const toggleEditorValue = (currentEditorId, toggleEditor) => ({
@@ -37,6 +48,16 @@ const updateEditorValue = (currentEditorId, updateEditorContent) => ({
   currentEditorId,
   updateEditorContent,
   toggleEditor: false
+});
+
+const buyStorySuccess = () => ({
+  type: constants.BUY_STORY_PART,
+  updateAllInfo: true
+});
+
+const toggleUpdateInfo = value => ({
+  type: constants.TOGGLE_UPDATE_INFO,
+  updateAllInfo: value
 });
 
 export const authWeb3Action = () => {
@@ -53,6 +74,12 @@ export const authWeb3Action = () => {
       // Catch any errors for any of the above operations.
       console.log(error);
     }
+  };
+};
+
+export const closeUpdateInfo = () => {
+  return async (dispatch, getState) => {
+    dispatch(toggleUpdateInfo(false));
   };
 };
 
@@ -75,6 +102,13 @@ export const buyStoryPart = (partId, color, font, content, nextValue) => {
         })
         .on("transactionHash", async function(hash) {
           console.log("購買成功");
+          dispatch(toggleUpdateInfo(true));
+        })
+        .on("confirmation", function(confirmationNumber, receipt) {
+          console.log("購買 confirmation");
+        })
+        .on("receipt", function(receipt) {
+          console.log("購買 receipt");
         });
     } catch (error) {
       console.log(error);
@@ -128,6 +162,18 @@ export const getCurrentReward = () => {
   };
 };
 
+export const getStoryCount = () => {
+  return async (dispatch, getState) => {
+    try {
+      const state = getState();
+      const contract = state.getIn(["book", "contract"]);
+      const response = await contract.getStoryPartCount();
+      const storyCount = response.toNumber();
+      console.log(storyCount);
+      dispatch(updateTotlaPartCount(storyCount));
+    } catch (error) {}
+  };
+};
 export const getStoryPart = (start, count) => {
   return async (dispatch, getState) => {
     try {
@@ -135,12 +181,12 @@ export const getStoryPart = (start, count) => {
       const contract = state.getIn(["book", "contract"]);
       const response = await contract.getStoryPartCount();
       const storyCount = response.toNumber();
-
-      if (start + count > storyCount) {
+      const end = start + count;
+      if (end > storyCount) {
         console.log("出錯了喔");
       } else {
         const partList = [];
-        for (let i = start; i < count; i++) {
+        for (let i = start; i < end; i++) {
           const response = await contract.parts(i);
 
           const partInfo = {
@@ -155,8 +201,64 @@ export const getStoryPart = (start, count) => {
 
           partList.push(partInfo);
         }
-        dispatch(updateStoryPart(partList));
+        console.log("更新的partList :" + partList);
+        dispatch(updateStoryPart(partList, start));
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getRank = () => {
+  return async (dispatch, getState) => {
+    try {
+      const state = getState();
+      const contract = state.getIn(["book", "contract"]);
+      // const response = await contract.getStoryPartCount();
+      // const rankCount = response.toNumber();
+      const rankCount = 0;
+      const rankList = [];
+      for (let i = 0; i < rankCount; i++) {
+        // const response = await contract.leaderboard(i);
+        // console.log(response);
+        // const partInfo = {
+        //   id: response.id.toNumber(),
+        //   author: response.author.toString(),
+        //   currentValue: Number(response.currentValue.toString()),
+        //   color: response.color.toNumber(),
+        //   font: response.font.toNumber(),
+        //   content: response.content.toString(),
+        //   nextValue: Number(response.currentValue.toString()) * 1.5
+        // };
+
+        // partList.push(partInfo);
+        const rankInfo = {};
+        rankList.push(rankList);
+      }
+      dispatch(updateRank(rankList));
+
+      // if (start + count > storyCount) {
+      //   console.log("出錯了喔");
+      // } else {
+      //   const partList = [];
+      //   for (let i = start; i < count; i++) {
+      //     const response = await contract.parts(i);
+
+      //     const partInfo = {
+      //       id: response.id.toNumber(),
+      //       author: response.author.toString(),
+      //       currentValue: Number(response.currentValue.toString()),
+      //       color: response.color.toNumber(),
+      //       font: response.font.toNumber(),
+      //       content: response.content.toString(),
+      //       nextValue: Number(response.currentValue.toString()) * 1.5
+      //     };
+
+      //     partList.push(partInfo);
+      //   }
+      //   dispatch(updateStoryPart(partList));
+      // }
     } catch (error) {
       console.log(error);
     }
