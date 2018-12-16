@@ -17,6 +17,7 @@ import { actionCreators } from "./store";
 import { from } from "rxjs";
 
 import img_ico_wincup from "../../statics/images/ico_wincup.png";
+import { getStoryCount } from "./store/actionCreators";
 
 class Book extends PureComponent {
   constructor(props) {
@@ -24,7 +25,7 @@ class Book extends PureComponent {
     this.init = false;
   }
   render() {
-    const { web3States, rewardPool, toggleEditor } = this.props;
+    const { web3States, rewardPool } = this.props;
     if (web3States) {
       return (
         <BookWrapper>
@@ -40,8 +41,14 @@ class Book extends PureComponent {
 
           {/* 書本 */}
           <PageWrapper>
-            <div className="btn click_prev" />
-            <div className="btn click_next" />
+            <div
+              onClick={() => this.getPrevPageInfo()}
+              className="btn click_prev"
+            />
+            <div
+              onClick={() => this.getNextPageInfo()}
+              className="btn click_next"
+            />
             <div className="one_page ">
               <ArticleList />
             </div>
@@ -82,15 +89,36 @@ class Book extends PureComponent {
         </BookWrapper>
       );
     } else {
-      return <div>沒有Web3 loding</div>;
+      return <div>等待錢包區塊鏈中</div>;
     }
+  }
+
+  getNextPageInfo() {
+    const { getStoryPart, currentPageIndex, totalPartCount } = this.props;
+    const nextIndex = currentPageIndex + 4;
+
+    if (nextIndex >= totalPartCount) {
+      console.log("超出範圍啦~~");
+      return;
+    }
+    console.log("更新下個頁面 : " + nextIndex);
+    getStoryPart(nextIndex, 4);
+  }
+
+  getPrevPageInfo() {
+    const { getStoryPart, currentPageIndex, totalPartCount } = this.props;
+
+    const nextIndex = currentPageIndex - 4;
+    if (nextIndex < 0) {
+      console.log("超出範圍啦~~");
+      return;
+    }
+    getStoryPart(nextIndex, 4);
   }
 
   getEditorInfo() {
     const { toggleEditor, parts, currentEditorId } = this.props;
     const currentEditorPart = parts[currentEditorId];
-    console.log(currentEditorId);
-    console.log(currentEditorPart);
     if (toggleEditor) {
       return (
         <Edit
@@ -112,13 +140,16 @@ class Book extends PureComponent {
       getStoryPart,
       updateAllInfo,
       getRank,
-      closeUpdateInfo
+      closeUpdateInfo,
+      currentPageIndex,
+      getStoryCount
     } = this.props;
     if (!this.init) {
       if (web3States) {
         console.log("初始化成功");
-        getStoryPart(0, 10);
+        getStoryPart(currentPageIndex, 4);
         getCurrentReward();
+        getStoryCount();
         getRank();
       } else {
         console.log("初始化失敗");
@@ -129,7 +160,7 @@ class Book extends PureComponent {
     if (updateAllInfo) {
       console.log("更新摟~~");
       closeUpdateInfo();
-      getStoryPart(0, 10);
+      getStoryPart(currentPageIndex, 4);
       getCurrentReward();
       getRank();
     }
@@ -147,7 +178,9 @@ const mapStateToProps = state => ({
   parts: state.getIn(["book", "parts"]),
   toggleEditor: state.getIn(["book", "toggleEditor"]),
   currentEditorId: state.getIn(["book", "currentEditorId"]),
-  updateAllInfo: state.getIn(["book", "updateAllInfo"])
+  updateAllInfo: state.getIn(["book", "updateAllInfo"]),
+  currentPageIndex: state.getIn(["book", "pagePartStart"]),
+  totalPartCount: state.getIn(["book", "totalPartCount"])
 });
 
 const mapDispathToProps = (dispatch, ownProps) => ({
@@ -173,6 +206,9 @@ const mapDispathToProps = (dispatch, ownProps) => ({
 
   closeUpdateInfo() {
     dispatch(actionCreators.closeUpdateInfo());
+  },
+  getStoryCount() {
+    dispatch(actionCreators.getStoryCount());
   }
 });
 
