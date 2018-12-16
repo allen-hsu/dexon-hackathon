@@ -16,6 +16,7 @@ import { actionCreators } from "./store";
 import { from } from "rxjs";
 
 import img_ico_wincup from "../../statics/images/ico_wincup.png";
+import { getRank } from "./store/actionCreators";
 
 class Book extends PureComponent {
   constructor(props) {
@@ -73,16 +74,26 @@ class Book extends PureComponent {
     }
   }
   componentDidUpdate() {
-    const { web3States, getCurrentReward, getStoryPart } = this.props;
+    const {
+      web3States,
+      getCurrentReward,
+      getStoryPart,
+      updateAllInfo,
+      getRank
+    } = this.props;
     if (!this.init) {
       if (web3States) {
         console.log("初始化成功");
         getStoryPart(0, 10);
         getCurrentReward();
+        getRank();
       } else {
         console.log("初始化失敗");
       }
       this.init = true;
+    }
+
+    if (updateAllInfo) {
     }
   }
 
@@ -97,7 +108,8 @@ const mapStateToProps = state => ({
   rewardPool: state.getIn(["book", "rewardPool"]),
   parts: state.getIn(["book", "parts"]),
   toggleEditor: state.getIn(["book", "toggleEditor"]),
-  currentEditorId: state.getIn(["book", "currentEditorId"])
+  currentEditorId: state.getIn(["book", "currentEditorId"]),
+  updateAllInfo: state.getIn(["book", "updateAllInfo"])
 });
 
 const mapDispathToProps = (dispatch, ownProps) => ({
@@ -115,6 +127,10 @@ const mapDispathToProps = (dispatch, ownProps) => ({
 
   getStoryPart(start, count) {
     dispatch(actionCreators.getStoryPart(start, count));
+  },
+
+  getRank() {
+    dispatch(actionCreators.getRank());
   }
 });
 
