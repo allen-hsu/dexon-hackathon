@@ -26,8 +26,8 @@ class Book extends PureComponent {
         <BookWrapper>
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
-            <div>排行綁</div>
-            {/* <RankList /> */}
+            <div>排行榜</div>
+            <RankList />
           </BookLeft>
           <BookCenter>
             <div>中間</div>
