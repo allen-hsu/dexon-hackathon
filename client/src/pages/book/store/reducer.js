@@ -14,7 +14,8 @@ const defaultState = fromJS({
   updateEditorContent: "", //編輯後故事的結果
   updateAllInfo: false,
   leaderboard: [], //排行榜
-  totalPartCount: 0
+  totalPartCount: 0,
+  inputValue: ""
 });
 
 const authWeb3 = (state, action) => {
@@ -61,6 +62,11 @@ export default (state = defaultState, action) => {
       return state.set("updateAllInfo", action.updateAllInfo);
     case constants.GET_TOTAL_PART_COUNT:
       return state.set("totalPartCount", action.totalPartCount);
+    case constants.BUY_STORY_PART:
+      return state.merge({
+        toggleEditor: action.toggleEditor,
+        updateAllInfo: action.updateAllInfo
+      });
     default:
       return state;
   }

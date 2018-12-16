@@ -52,7 +52,8 @@ const updateEditorValue = (currentEditorId, updateEditorContent) => ({
 
 const buyStorySuccess = () => ({
   type: constants.BUY_STORY_PART,
-  updateAllInfo: true
+  updateAllInfo: true,
+  toggleEditor: false
 });
 
 const toggleUpdateInfo = value => ({
@@ -102,7 +103,7 @@ export const buyStoryPart = (partId, color, font, content, nextValue) => {
         })
         .on("transactionHash", async function(hash) {
           console.log("購買成功");
-          dispatch(toggleUpdateInfo(true));
+          dispatch(buyStorySuccess());
         })
         .on("confirmation", function(confirmationNumber, receipt) {
           console.log("購買 confirmation");
@@ -188,7 +189,6 @@ export const getStoryPart = (start, count) => {
         const partList = [];
         for (let i = start; i < end; i++) {
           const response = await contract.parts(i);
-
           const partInfo = {
             id: response.id.toNumber(),
             author: response.author.toString(),
@@ -198,7 +198,7 @@ export const getStoryPart = (start, count) => {
             content: response.content.toString(),
             nextValue: Number(response.currentValue.toString()) * 1.5
           };
-
+          console.log("partList" + partInfo);
           partList.push(partInfo);
         }
         console.log("更新的partList :" + partList);

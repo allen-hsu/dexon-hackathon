@@ -4,6 +4,11 @@ import { actionCreators } from "../store";
 import { EditorWrapper, EditorContainer } from "../style";
 
 class Editor extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.onHandleChange = this.onHandleChange.bind(this);
+    this.init = false;
+  }
   render() {
     const {
       id,
@@ -15,44 +20,69 @@ class Editor extends PureComponent {
       updateEditor,
       closeEditor,
       buyStoryPart,
-      parts
+      parts,
+      inputValue
     } = this.props;
 
-    console.log(parts);
+    console.log(content);
+    // if (!this.init) {
+    //   this.editText = content;
+    //   this.init = true;
+    // }
     return (
       <EditorWrapper>
         <EditorContainer>
-          
-          <div className="popup_book" >
+          <div className="popup_book">
             <div className="editor">
-                {/* <div className="box" contentEditable="true"> */}
-                <textarea className="box">{content}</textarea>
-                <div className="left">
-                    <p><span className="tt">當前價格</span> {currentValue} dex </p>
-                    <p><span className="tt">購買價錢</span> {nextValue} dex</p>
-                    <p className="author tt"><span className="tt">作者</span> {author}</p>
-                    
+              <textarea
+                value={this.editText}
+                onChange={this.onHandleChange}
+                className="box"
+              />
+              <div className="left">
+                <p>
+                  <span className="tt">當前價格</span> {currentValue} dex{" "}
+                </p>
+                <p>
+                  <span className="tt">購買價錢</span> {nextValue} dex
+                </p>
+                <p className="author tt">
+                  <span className="tt">作者</span> {author}
+                </p>
+              </div>
+              <div className="right">
+                <div
+                  onClick={() => buyStoryPart(this.props, this.editText)}
+                  className="btn btn_edit btn_buy"
+                >
+                  Buy
                 </div>
-                <div className="right">
-                    <div onClick={() => buyStoryPart(this.props)} className="btn btn_edit btn_buy">Buy</div>
-                    <div onClick={() => updateEditor()} className="btn btn_edit">Ok</div>
-                    <div onClick={() => closeEditor()} className="btn btn_edit ">Cancel</div>
+                <div onClick={() => updateEditor()} className="btn btn_edit">
+                  Ok
                 </div>
+                <div onClick={() => closeEditor()} className="btn btn_edit ">
+                  Cancel
+                </div>
+              </div>
             </div>
           </div>
-
-
-
         </EditorContainer>
       </EditorWrapper>
     );
   }
-}
 
+  componentDidMount() {}
+
+  onHandleChange(event) {
+    // console.log(event.target.value);
+    this.editText = event.target.value;
+  }
+}
 const mapStateToProps = (state, ownProps) => {
   return {
     currentEditorId: state.getIn(["book", "currentEditorId"]),
-    parts: state.getIn(["book", "parts"])
+    parts: state.getIn(["book", "parts"]),
+    inputValue: state.getIn(["book", "inputValue"])
   };
 };
 
@@ -65,8 +95,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(actionCreators.updateEditor(ownProps.currentEditorId, "測試"));
   },
 
-  buyStoryPart(props) {
-    console.log("買了故事");
+  buyStoryPart(props, editText) {
     console.log(props.currentEditorId);
     const partInfo = props.parts[props.currentEditorId];
     dispatch(
@@ -74,7 +103,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         partInfo.id,
         0,
         0,
-        "買了故事",
+        editText,
         partInfo.nextValue
       )
     );

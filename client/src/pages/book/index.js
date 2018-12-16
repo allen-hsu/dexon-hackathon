@@ -23,6 +23,7 @@ class Book extends PureComponent {
   constructor(props) {
     super(props);
     this.init = false;
+    this.update = false;
   }
   render() {
     const { web3States, rewardPool } = this.props;
@@ -36,8 +37,6 @@ class Book extends PureComponent {
               {rewardPool} DEX • 進行中
             </div>
           </div>
-
-         
 
           {/* 書本 */}
           <PageWrapper>
