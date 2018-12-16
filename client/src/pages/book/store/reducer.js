@@ -53,6 +53,8 @@ export default (state = defaultState, action) => {
       return updateEditorValue(state, action);
     case constants.UPDATE_RANK_VALUE:
       return state.set("leaderboard", action.leaderboard);
+    case constants.TOGGLE_UPDATE_INFO:
+      return state.set("updateAllInfo", action.updateAllInfo);
     default:
       return state;
   }

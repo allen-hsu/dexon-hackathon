@@ -12,3 +12,4 @@ export const BUY_STORY_PART = "book/BUY_STORY_PART";
 export const TOGGLE_EDITOR = "book/TOGGLE_EDITOR";
 export const UPDATE_EDITOR_VALUE = "book/UPDATE_EDITOR_VALUE";
 export const UPDATE_RANK_VALUE = "book/UPDATE_RANK_VALUE";
+export const TOGGLE_UPDATE_INFO = "book/TOGGLE_UPDATE_INFO";

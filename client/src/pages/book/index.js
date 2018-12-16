@@ -36,7 +36,6 @@ class Book extends PureComponent {
               DEX • 進行中
             </div>
           </div>
-
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
             <div className="leader_board">
@@ -66,11 +65,30 @@ class Book extends PureComponent {
           <BookRight>
             <div>右邊</div>
           </BookRight>
-          {toggleEditor ? <Edit /> : null}
+          {this.getEditorInfo()}
         </BookWrapper>
       );
     } else {
       return <div>沒有Web3 loding</div>;
+    }
+  }
+
+  getEditorInfo() {
+    const { toggleEditor, parts, currentEditorId } = this.props;
+    const currentEditorPart = parts[currentEditorId];
+    console.log(currentEditorId);
+    console.log(currentEditorPart);
+    if (toggleEditor) {
+      return (
+        <Edit
+          author={currentEditorPart.author}
+          content={currentEditorPart.content}
+          currentValue={currentEditorPart.currentValue}
+          nextValue={currentEditorPart.nextValue}
+        />
+      );
+    } else {
+      return null;
     }
   }
   componentDidUpdate() {
@@ -79,7 +97,8 @@ class Book extends PureComponent {
       getCurrentReward,
       getStoryPart,
       updateAllInfo,
-      getRank
+      getRank,
+      closeUpdateInfo
     } = this.props;
     if (!this.init) {
       if (web3States) {
@@ -94,6 +113,11 @@ class Book extends PureComponent {
     }
 
     if (updateAllInfo) {
+      console.log("更新摟~~");
+      closeUpdateInfo();
+      getStoryPart(0, 10);
+      getCurrentReward();
+      getRank();
     }
   }
 
@@ -131,6 +155,10 @@ const mapDispathToProps = (dispatch, ownProps) => ({
 
   getRank() {
     dispatch(actionCreators.getRank());
+  },
+
+  closeUpdateInfo() {
+    dispatch(actionCreators.closeUpdateInfo());
   }
 });
 

@@ -10,6 +10,7 @@ class Editor extends PureComponent {
       author,
       content,
       currentValue,
+      nextValue,
       currentEditorId,
       updateEditor,
       closeEditor,
@@ -25,6 +26,7 @@ class Editor extends PureComponent {
             <div>作者: {author}</div>
             <div>內容: {content}</div>
             <div>目前價值: {currentValue}</div>
+            <div>購買價錢: {nextValue}</div>
             <button onClick={() => closeEditor()}>取消</button>
             <button onClick={() => updateEditor()}>確認</button>
             <button onClick={() => buyStoryPart(this.props)}>購買</button>

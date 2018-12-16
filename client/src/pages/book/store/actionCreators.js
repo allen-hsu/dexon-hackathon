@@ -44,6 +44,16 @@ const updateEditorValue = (currentEditorId, updateEditorContent) => ({
   toggleEditor: false
 });
 
+const buyStorySuccess = () => ({
+  type: constants.BUY_STORY_PART,
+  updateAllInfo: true
+});
+
+const toggleUpdateInfo = value => ({
+  type: constants.TOGGLE_UPDATE_INFO,
+  updateAllInfo: value
+});
+
 export const authWeb3Action = () => {
   return async dispatch => {
     try {
@@ -58,6 +68,12 @@ export const authWeb3Action = () => {
       // Catch any errors for any of the above operations.
       console.log(error);
     }
+  };
+};
+
+export const closeUpdateInfo = () => {
+  return async (dispatch, getState) => {
+    dispatch(toggleUpdateInfo(false));
   };
 };
 
@@ -80,10 +96,7 @@ export const buyStoryPart = (partId, color, font, content, nextValue) => {
         })
         .on("transactionHash", async function(hash) {
           console.log("購買成功");
-          const response = await contract.rewardPool();
-          const reward = Number(response.toString());
-          console.log("目前獎金 : " + reward);
-          // dispatch(updateReward(reward));
+          dispatch(toggleUpdateInfo(true));
         })
         .on("confirmation", function(confirmationNumber, receipt) {
           console.log("購買 confirmation");
