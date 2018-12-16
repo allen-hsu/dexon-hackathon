@@ -22,7 +22,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   toggleEditor(id, value) {
-    // console.log("打開編輯器");
+    console.log("打開編輯器, 故事id : " + id);
     dispatch(actionCreators.toggleEditor(id, value));
   }
 });

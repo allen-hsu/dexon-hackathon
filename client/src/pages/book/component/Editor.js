@@ -13,8 +13,11 @@ class Editor extends PureComponent {
       currentEditorId,
       updateEditor,
       closeEditor,
-      buyStoryPart
+      buyStoryPart,
+      parts
     } = this.props;
+
+    console.log(parts);
     return (
       <EditorWrapper>
         <EditorContainer>
@@ -50,9 +53,16 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
   buyStoryPart(props) {
     console.log("買了故事");
-    console.log(props);
+    console.log(props.currentEditorId);
+    const partInfo = props.parts[props.currentEditorId];
     dispatch(
-      actionCreators.buyStoryPart(props.currentEditorId, 0, 0, "買了故事")
+      actionCreators.buyStoryPart(
+        partInfo.id,
+        0,
+        0,
+        "買了故事",
+        partInfo.nextValue
+      )
     );
   }
 });

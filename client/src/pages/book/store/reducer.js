@@ -41,9 +41,12 @@ export default (state = defaultState, action) => {
     case constants.UPDATE_REWARD_VALUE:
       return state.set("rewardPool", action.rewardPool);
     case constants.UPDATE_STORY_PART_VALUE:
-      return state.set("parts", fromJS(action.parts));
+      return state.set("parts", action.parts);
     case constants.TOGGLE_EDITOR:
-      return state.set("toggleEditor", action.toggleEditor);
+      return state.merge({
+        toggleEditor: action.toggleEditor,
+        currentEditorId: action.currentEditorId
+      });
     case constants.UPDATE_EDITOR_VALUE:
       return updateEditorValue(state, action);
     default:

@@ -50,9 +50,20 @@ contract Book
     
     // 所有段落的初始價值 1 Dexon
     uint256 defaultValue = 1e18;
+
+    uint storedData;
 //endregion
 
 //region buy function    
+      
+
+    function set(uint x) public payable {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
     // 使用者購買段落所有權
     function buyStoryPart(uint32 partID, uint8 color, uint8 font, string memory content)
     editable inBook(partID) public  payable
@@ -116,6 +127,9 @@ contract Book
 //endregion
     
 //region get function
+    function getStoryPartCount() public view returns(uint256) {
+        return parts.length;
+    }
     // 輸入故事段落編號，取得該段落上次出價金額
     function getLastValueByID(uint32 partID) public view returns(uint256)
     {
