@@ -13,6 +13,7 @@ import ArticleList from "./component/ArticleList";
 import RankList from "./component/RankList";
 import { actionCreators } from "./store";
 import { from } from "rxjs";
+import Edit from "./component/Editor";
 
 class Book extends PureComponent {
   constructor(props) {
@@ -20,10 +21,11 @@ class Book extends PureComponent {
     this.init = false;
   }
   render() {
-    const { web3States, rewardPool } = this.props;
+    const { web3States, rewardPool, toggleEditor } = this.props;
     if (web3States) {
       return (
-        <BookWrapper>
+        // <BookWrapper>
+        <div>
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
             <div>排行榜</div>
@@ -38,10 +40,12 @@ class Book extends PureComponent {
           <BookRight>
             <div>右邊</div>
           </BookRight>
-        </BookWrapper>
+          {toggleEditor ? <Edit /> : null}
+        </div>
+        // </BookWrapper>
       );
     } else {
-      return <div>沒有Web3 loding</div>;
+      return <div>讀取中</div>;
     }
   }
   componentDidUpdate() {
@@ -67,7 +71,9 @@ const mapStateToProps = state => ({
   web3States: state.getIn(["book", "web3"]),
   storageValue: state.getIn(["book", "storageValue"]),
   rewardPool: state.getIn(["book", "rewardPool"]),
-  parts: state.getIn(["book", "parts"])
+  parts: state.getIn(["book", "parts"]),
+  toggleEditor: state.getIn(["book", "toggleEditor"]),
+  currentEditorId: state.getIn(["book", "currentEditorId"])
 });
 
 const mapDispathToProps = (dispatch, ownProps) => ({
