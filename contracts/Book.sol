@@ -23,6 +23,7 @@ contract Book
         uint8 color;            //文字顏色
         uint8 font;             //文字字型
         string content;         //段落文字內容
+        uint256 timestamp;      //交易完成時間
     }
     
 //region members
@@ -52,9 +53,6 @@ contract Book
 //endregion
 
 //region buy function    
-    function getStoryPartCount() public view returns(uint256) {
-        return parts.length;
-    }
     // 使用者購買段落所有權
     function buyStoryPart(uint32 partID, uint8 color, uint8 font, string memory content)
     editable inBook(partID) public  payable
@@ -94,7 +92,7 @@ contract Book
         }
         
         //交易成立，更改段落
-        StoryPart memory part = StoryPart(partID, msg.sender, value, color, font, content);
+        StoryPart memory part = StoryPart(partID, msg.sender, value, color, font, content, block.timestamp);
         parts[partID] = part;
         //更新排行榜
         leaderboard[msg.sender] ++;
@@ -155,7 +153,7 @@ contract Book
     {
         for(uint32 i = 0; i < totalPart ; i++)
         {
-            StoryPart memory part = StoryPart(i, owner, defaultValue, 0, 0, "");
+            StoryPart memory part = StoryPart(i, owner, defaultValue, 0, 0, "", block.timestamp);
             parts.push(part);
         }
     }

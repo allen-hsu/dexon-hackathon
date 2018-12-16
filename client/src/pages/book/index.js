@@ -13,7 +13,10 @@ import ArticleList from "./component/ArticleList";
 import RankList from "./component/RankList";
 import { actionCreators } from "./store";
 import { from } from "rxjs";
-import Edit from "./component/Editor";
+
+
+
+import img_ico_wincup from "../../statics/images/ico_wincup.png";
 
 class Book extends PureComponent {
   constructor(props) {
@@ -21,15 +24,34 @@ class Book extends PureComponent {
     this.init = false;
   }
   render() {
-    const { web3States, rewardPool, toggleEditor } = this.props;
+    const { web3States, rewardPool } = this.props;
     if (web3States) {
       return (
-        // <BookWrapper>
-        <div>
+        <BookWrapper>
+          <div className="top_info">
+            <h1>Once Upon a Time...</h1>
+            <div class="info">總價值：163,423.5642 DEX   •   已創作文字：2736238   •   獎池：22,271.8587 DEX   •   進行中</div>    
+          </div>
+          
+          
+
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
-            <div>排行榜</div>
-            <RankList />
+            <div className="leader_board">
+            <h2><b>排行榜</b> <i className="fa fa-angle-down" aria-hidden="true"></i></h2>
+            <div>
+                <div className="img_box">
+                  <img src={img_ico_wincup} alt="" />
+                  <div className="top_rate">
+                      <b>1. Xiakecat</b> <br/>
+                      34,137 個字 <br/>
+                      3,124.4850 Dex
+                  </div>
+                </div>
+                <RankList />
+            </div>
+      
+            </div>
           </BookLeft>
           <BookCenter>
             <div>中間</div>
@@ -40,12 +62,10 @@ class Book extends PureComponent {
           <BookRight>
             <div>右邊</div>
           </BookRight>
-          {toggleEditor ? <Edit /> : null}
-        </div>
-        // </BookWrapper>
+        </BookWrapper>
       );
     } else {
-      return <div>讀取中</div>;
+      return <div>沒有Web3 loding</div>;
     }
   }
   componentDidUpdate() {
@@ -71,9 +91,7 @@ const mapStateToProps = state => ({
   web3States: state.getIn(["book", "web3"]),
   storageValue: state.getIn(["book", "storageValue"]),
   rewardPool: state.getIn(["book", "rewardPool"]),
-  parts: state.getIn(["book", "parts"]),
-  toggleEditor: state.getIn(["book", "toggleEditor"]),
-  currentEditorId: state.getIn(["book", "currentEditorId"])
+  parts: state.getIn(["book", "parts"])
 });
 
 const mapDispathToProps = (dispatch, ownProps) => ({

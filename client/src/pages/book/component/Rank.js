@@ -6,11 +6,11 @@ class Rank extends PureComponent {
   render() {
     const { author, contentCount, currentValue } = this.props;
     return (
-      <div>
-        <div>作者: {author}</div>
-        <div>文字數量: {contentCount}</div>
-        <div>Dex: {currentValue}</div>
-      </div>
+      <li>
+        <p><b>2. {author}</b></p>
+        <p>888888 個字</p>
+        <p>3,124.4850 Dex</p>
+      </li>
     );
   }
 }
