@@ -50,9 +50,15 @@ export default (state = defaultState, action) => {
         pagePartStart: action.pagePartStart
       });
     case constants.TOGGLE_EDITOR:
+      let currentIndx = 0;
+      if (action.currentEditorId >= 4) {
+        currentIndx = action.currentEditorId % 4;
+      } else {
+        currentIndx = action.currentEditorId;
+      }
       return state.merge({
         toggleEditor: action.toggleEditor,
-        currentEditorId: action.currentEditorId
+        currentEditorId: currentIndx
       });
     case constants.UPDATE_EDITOR_VALUE:
       return updateEditorValue(state, action);
