@@ -1,26 +1,27 @@
 import React, { PureComponent } from "react";
-import { BookWrapper, PageItem, PageWrapper, PageScene, PageBook, PageBox, ItemFront, ItemBack } from "../style";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
-import { Link } from "react-router-dom";
-
 
 class Article extends PureComponent {
-    render() {
-        return (
-            <div>This Article</div>
-            );
-    }
-    
+  render() {
+    const { author, content, currentValue } = this.props;
+    return (
+      <div>
+        <div>作者: {author}</div>
+        <div>內容: {content}</div>
+        <div>目前價值: {currentValue}</div>
+        <button>購買</button>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {};
-  };
-  
-  const mapDispatchToProps = (dispatch, ownProps) => ({});
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Article);
-  
+  return {};
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => ({});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Article);

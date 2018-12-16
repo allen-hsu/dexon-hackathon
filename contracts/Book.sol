@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.4.25;
 
 contract Book
 {
@@ -11,13 +11,14 @@ contract Book
         init();
     }
     
+    // 段落更新成功時發送通知
     event storyUpdated(uint32 partID, address author, uint256 currentValue, uint8 color, uint8 font, string content);
     
     // 段落定義
     struct StoryPart
     {
         uint32 id;              //段落編號
-        address payable author;         //該段落目前作者
+        address author;         //該段落目前作者
         uint256 currentValue;   //目前價值
         uint8 color;            //文字顏色
         uint8 font;             //文字字型
@@ -31,8 +32,14 @@ contract Book
     // public 獎金池
     uint256 public rewardPool = 0;
     
+    // public 排行榜 (作者錢包地址與貢獻段落數量)
+    mapping(address => uint32) public leaderboard;
+    
+    // public 已結束編輯了嗎，若結束編輯則所有會更動資料的功能都不能用
+    bool public isEnd = false;
+    
     // 我們服務用的錢包地址
-    address payable owner;
+    address owner;
     
     // 每段字數上限
     uint32 maxCharPerPart;
@@ -42,14 +49,15 @@ contract Book
     
     // 所有段落的初始價值 1 Dexon
     uint256 defaultValue = 1e18;
-    
-    // 下次增額的倍率
-    // ufixed8x8 nextValueRate = 1.5;
 //endregion
 
 //region buy function    
+    function getStoryPartCount() public view returns(uint256) {
+        return parts.length;
+    }
     // 使用者購買段落所有權
-    function buyStoryPart(uint32 partID, uint8 color, uint8 font, string memory content) inBook(partID) public  payable
+    function buyStoryPart(uint32 partID, uint8 color, uint8 font, string memory content)
+    editable inBook(partID) public  payable
     {
         // 檢查交易金額
         uint256 value = msg.value;
@@ -59,25 +67,55 @@ contract Book
         require(bytes(content).length <= maxCharPerPart);
         
         // 發錢囉
-        // 先讓前一位作者拿回本金
+        address lastAuthor = parts[partID].author;
         uint256 lastValue = parts[partID].currentValue;
-        withdrawToSomeone(parts[partID].author, lastValue);
-        // 分配剩餘金額
-        uint256 n = value - lastValue;
-        n = n / 10;
-        // 前一位作者的紅利
-        withdrawToSomeone(parts[partID].author, n * 5);
-        // 給我們的酬勞
-        withdrawToSomeone(owner, n * 4);
-        // 進入獎金池
-        rewardPool += n;
+        // 判斷有沒有使用者編輯過此段落
+        if(lastAuthor == owner)
+        {
+            uint256 n = value / 10;
+            // 給我們的酬勞
+            withdrawToSomeone(owner, n * 9);
+            // 進入獎金池
+            rewardPool += n;
+        }
+        else
+        {
+            // 先讓前一位作者拿回本金
+            withdrawToSomeone(lastAuthor, lastValue);
+            // 分配剩餘金額
+            uint256 m = value - lastValue;
+            m = m / 10;
+            // 前一位作者的紅利
+            withdrawToSomeone(lastAuthor, m * 5);
+            // 給我們的酬勞
+            withdrawToSomeone(owner, m * 4);
+            // 進入獎金池
+            rewardPool += m;
+        }
         
         //交易成立，更改段落
         StoryPart memory part = StoryPart(partID, msg.sender, value, color, font, content);
         parts[partID] = part;
+        //更新排行榜
+        leaderboard[msg.sender] ++;
+        if(lastAuthor != owner) leaderboard[lastAuthor] --;
+        //發送更動段落的通知
         emit storyUpdated(partID, msg.sender, value, color, font, content);
     }
 //endregion  
+    
+//region the end
+    // 結束編輯此書
+    function theEnd() editable onlyOwner public
+    {
+        isEnd = true;
+        uint256 n = rewardPool / totalPart;
+        for(uint32 i = 0; i < totalPart ; i++)
+        {
+            withdrawToSomeone(parts[i].author, n);
+        }
+    }
+//endregion
     
 //region get function
     // 輸入故事段落編號，取得該段落上次出價金額
@@ -109,7 +147,6 @@ contract Book
     {
         return parts[partID].font;
     }
-
 //endregion
 
 //region private function   
@@ -123,27 +160,28 @@ contract Book
         }
     }
     
-    function withdrawToSomeone(address payable someone, uint amount) private returns(bool) {
-        require(amount < address(this).balance);
+    // 轉帳出去
+    function withdrawToSomeone(address someone, uint amount) private returns(bool) {
+        require(amount <= address(this).balance);
         address(someone).transfer(amount);
         return true;
     }
-     
-    //結束
-    // function endBook() onlyOwner public
-    // {
-    //      emit selfdestruct(owner);
-    // }
     
-    //我們服務專用的功能
+    // 我們服務專用的功能
     modifier onlyOwner() {
         require(msg.sender == owner);
         _;
     }
     
-    //是在範圍內的段落編號
+    // 是在範圍內的段落編號
     modifier inBook(uint32 partID) {
         require(partID < totalPart);
+        _;
+    }
+    
+    // 判斷書還可以編輯
+    modifier editable() {
+        require(!isEnd);
         _;
     }
 //endregion
