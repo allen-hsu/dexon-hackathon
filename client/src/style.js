@@ -142,7 +142,14 @@ b {
           list-style: none;
           p {
             line-height:1.3;
+            &.rank {
+              margin: 0 10px;
+              overflow:hidden;
+              white-space: pre;
+        text-overflow : ellipsis;
+            }
           }
+          
       }
       
   }

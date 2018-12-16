@@ -7,7 +7,7 @@ class Rank extends PureComponent {
     const { author, contentCount, currentValue } = this.props;
     return (
       <li>
-        <p>
+        <p className="rank">
           <b>{author}</b>
         </p>
         <p>擁有 {contentCount} 個段落</p>
