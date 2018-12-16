@@ -6,6 +6,7 @@ import {
   BookLeft,
   BookCenter,
   BookRight,
+  PageWrapper,
   ArticleListWrapper
 } from "./style";
 import Page from "./component/Page";
@@ -16,7 +17,6 @@ import { actionCreators } from "./store";
 import { from } from "rxjs";
 
 import img_ico_wincup from "../../statics/images/ico_wincup.png";
-import { getRank } from "./store/actionCreators";
 
 class Book extends PureComponent {
   constructor(props) {
@@ -30,18 +30,50 @@ class Book extends PureComponent {
         <BookWrapper>
           <div className="top_info">
             <h1>Once Upon a Time...</h1>
-            <div class="info">
-              總價值：163,423.5642 DEX • 已創作文字：2736238 • 獎池：
-              {rewardPool}
-              DEX • 進行中
+            <div className="info">
+              總價值：163,423.5642 DEX • 已創作文字：2736238 • 獎池：{" "}
+              {rewardPool} DEX • 進行中
             </div>
           </div>
+
+          {/* 跳出編輯器 */}
+          <div id="popup_book" className="popup_book">
+            <div className="editor">
+              {/* <div className="box" contentEditable="true"> */}
+              <textarea className="box" />
+              <div className="left">
+                當前價格: 9.533 dex <br />
+                作者: God's right hand <br />
+                最後編輯時間: 2018/12/12 23:08 <br />
+              </div>
+              <div className="right">
+                <div id="b_buy" className="btn btn_edit btn_buy">
+                  Buy
+                </div>
+                <div id="b_ok" className="btn btn_edit">
+                  Ok
+                </div>
+                <div id="b_cancel" className="btn btn_edit ">
+                  Cancel
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 書本 */}
+          <PageWrapper>
+            <div className="btn click_prev" />
+            <div className="btn click_next" />
+            <div className="one_page ">
+              <ArticleList />
+            </div>
+          </PageWrapper>
+
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
             <div className="leader_board">
               <h2>
-                <b>排行榜</b>{" "}
-                <i className="fa fa-angle-down" aria-hidden="true" />
+                排行榜 <i className="fa fa-angle-down" aria-hidden="true" />
               </h2>
               <div>
                 <div className="img_box">
@@ -54,6 +86,9 @@ class Book extends PureComponent {
                 </div>
                 <RankList />
               </div>
+            </div>
+            <div className="help_board">
+              <h2>幫助 </h2>
             </div>
           </BookLeft>
           <BookCenter>
@@ -91,6 +126,7 @@ class Book extends PureComponent {
       return null;
     }
   }
+
   componentDidUpdate() {
     const {
       web3States,

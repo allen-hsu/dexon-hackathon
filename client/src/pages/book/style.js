@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import bg from "../../statics/images/bg.jpg";
+import page_bg from "../../statics/images/page_bg.png";
 
 export const BookWrapper = styled.div`
   background-image: url(${bg});
@@ -34,6 +35,7 @@ export const PageWrapper = styled.div`
   height: 48vw;
   max-width: 1320px;
   background-size: contain;
+  background-image: url(${page_bg});
 `;
 export const PageScene = styled.div`
   position: absolute;
