@@ -76,7 +76,7 @@ b {
   font-weight: 300;
   h1 {
       font-weight: 300;
-      font-size: 25px;
+      font-size: 30px;
       margin:20px 0;
   }
 }
@@ -148,6 +148,13 @@ b {
   }
 }
 
+.wait {
+  margin: 100px auto;
+  color:#fff;
+  font-size: 40px;
+  text-align:center;
+  font-weight: 300;
+}
 
 .btn {
   &.click_prev,

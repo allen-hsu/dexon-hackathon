@@ -89,7 +89,11 @@ class Book extends PureComponent {
         </BookWrapper>
       );
     } else {
-      return <div>等待錢包區塊鏈中</div>;
+      return (
+        <BookWrapper>
+        <div className="wait">等待錢包區塊鏈中...</div>
+        </BookWrapper>
+      );
     }
   }
 
