@@ -176,7 +176,8 @@ b {
   }
   &.click_prev {
       background-position: left top;
-      left: -6vw;
+      right: -6vw;
+      bottom:180px;
       &:hover {
           background-position: left bottom;
       }
