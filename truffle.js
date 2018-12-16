@@ -16,7 +16,8 @@ module.exports = {
         true,
         "m/44'/237'/0'/0/"
       ),
-      network_id: "*"
+      network_id: "*",
+      gas: 4712388
     },
     development: {
       network_id: "*",
