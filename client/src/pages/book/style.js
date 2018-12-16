@@ -2,15 +2,14 @@ import styled from "styled-components";
 import bg from "../../statics/images/bg.jpg";
 
 export const BookWrapper = styled.div`
-  background-image:  url(${bg});
-  background-size:cover;
-  background-position:center center;
+  background-image: url(${bg});
+  background-size: cover;
+  background-position: center center;
   position: fixed;
-  width:100vw;
-  height:100vh;
-  top:0;
-  left:0;
-
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
 `;
 
 export const BookLeft = styled.div`
@@ -80,32 +79,31 @@ export const PageItem = styled.div`
   }
 
   &.active {
-      z-index: 1;
+    z-index: 1;
   }
 
   &.flipped {
-      -webkit-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
   }
 
   &.flipped:last-of-type {
-      z-index: 1;
+    z-index: 1;
   }
 `;
 
 const Common = styled.div`
-position: absolute;
-width: 100%;
-height: 100%;
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
-box-sizing: border-box;
--webkit-backface-visibility: hidden;
-backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 `;
 
-export const ItemFront = styled(Common)`
-`;
+export const ItemFront = styled(Common)``;
 export const ItemBack = styled(Common)`
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
