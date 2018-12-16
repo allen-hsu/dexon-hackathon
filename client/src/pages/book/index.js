@@ -14,6 +14,10 @@ import RankList from "./component/RankList";
 import { actionCreators } from "./store";
 import { from } from "rxjs";
 
+
+
+import img_ico_wincup from "../../statics/images/ico_wincup.png";
+
 class Book extends PureComponent {
   constructor(props) {
     super(props);
@@ -24,14 +28,30 @@ class Book extends PureComponent {
     if (web3States) {
       return (
         <BookWrapper>
-           <div className="top_info">
-          <h1>Once Upon a Time...</h1>
-          <div class="info">總價值：163,423.5642 DEX   •   已創作文字：2736238   •   獎池：22,271.8587 DEX   •   進行中</div>    
-        </div>  
+          <div className="top_info">
+            <h1>Once Upon a Time...</h1>
+            <div class="info">總價值：163,423.5642 DEX   •   已創作文字：2736238   •   獎池：22,271.8587 DEX   •   進行中</div>    
+          </div>
+          
+          
+
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
-            <div>排行榜</div>
-            <RankList />
+            <div className="leader_board">
+            <h2><b>排行榜</b> <i className="fa fa-angle-down" aria-hidden="true"></i></h2>
+            <div>
+                <div className="img_box">
+                  <img src={img_ico_wincup} alt="" />
+                  <div className="top_rate">
+                      <b>1. Xiakecat</b> <br/>
+                      34,137 個字 <br/>
+                      3,124.4850 Dex
+                  </div>
+                </div>
+                <RankList />
+            </div>
+      
+            </div>
           </BookLeft>
           <BookCenter>
             <div>中間</div>

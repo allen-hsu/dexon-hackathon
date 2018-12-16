@@ -62,6 +62,9 @@ img {
   max-width: 100%;
 }
 
+b {
+  font-weight:800;
+}
 
 .top_info {
   color: #fff;
@@ -123,7 +126,7 @@ img {
   }
   .list_rate {
       overflow: auto;
-      height: calc( 100vh - 380px);
+      height: calc( 100vh - 360px);
       ul {
           padding: 0;
           margin: 0;
@@ -131,6 +134,9 @@ img {
       li {
           padding: 10px 0;
           list-style: none;
+          p {
+            line-height:1.3;
+          }
       }
       
   }

@@ -6,19 +6,21 @@ import Rank from "./Rank";
 class RankList extends PureComponent {
   render() {
     const { parts } = this.props;
+    // console.log(parts);
     return (
-      <div>
+      <div  className="list_rate">
+        <ul>
         {parts.map((item, index) => {
           return (
-            <div key={item.get("id")}>
-              <Rank
-                author={"排行榜作者"}
-                contentCount={"寫入內容"}
-                currentValue={"數值"}
-              />
-            </div>
+               <Rank
+               key={item.get("id")}
+                 author={"排行榜作者"}
+                 contentCount={"寫入內容"}
+                 currentValue={"數值"}
+               />             
           );
         })}
+        </ul>
       </div>
     );
   }
