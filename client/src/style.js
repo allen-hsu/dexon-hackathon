@@ -218,18 +218,31 @@ b {
     left: 0;
     width: 100%;
     height: 100%;
-    line-height: 1.5;
-      
+    line-height: 1.8;
   }
   &:hover {
       background-position: left bottom;
   }
+}
+
+.btn_ok {
+    &:after {
+        content: "Ok";
+    }
+}
+.btn_cancel {
+    &:after {
+        content: "Cancel";
+    }
 }
 .btn_buy {
   background-size: 100%;
   background-image: url(${img_btn_buy});
   &:hover {
       background-position: left bottom;
+  }
+  &:after {
+    content: "Buy";
   }
 }
 
@@ -280,9 +293,12 @@ b {
   }
   .right {
       float: right;
+      display:flex;
+      width:52%;
       .btn_edit {
-          float: right;
+        
           margin: 0 3px;
+          padding-top:14%;
       }
   }
 }
@@ -355,9 +371,9 @@ b {
 
           .right {
               width: 30%;
-              float: right;
-
-
+              float: right;        
+              display: flex;
+              align-items: center;
           }
       }
   }

@@ -53,18 +53,19 @@ class Editor extends PureComponent {
                 </p>
               </div>
               <div className="right">
+                <div onClick={() => closeEditor()} className="btn btn_edit btn_cancel">
+                  Cancel
+                </div>
+                <div onClick={() => updateEditor()} className="btn btn_edit btn_ok">
+                  Ok
+                </div>
                 <div
                   onClick={() => buyStoryPart(this.props, this.editText)}
                   className="btn btn_edit btn_buy"
                 >
                   Buy
                 </div>
-                <div onClick={() => updateEditor()} className="btn btn_edit">
-                  Ok
-                </div>
-                <div onClick={() => closeEditor()} className="btn btn_edit ">
-                  Cancel
-                </div>
+                
               </div>
             </div>
           </div>
