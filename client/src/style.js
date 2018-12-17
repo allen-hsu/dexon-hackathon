@@ -193,6 +193,7 @@ b {
 }
 
 .btn_edit {
+  position: relative;
   background-image: url(${img_btn_edit});
   width: 124px;
   height: 56px;
@@ -206,7 +207,20 @@ b {
   color: #fff;
   background-color:rgba(0,0,0,0);
   border:0;
-
+  max-width:100%;
+  padding-top:42%;
+  height:0;
+  background-size:100%;
+  &:after {
+    content: "Edit";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 1.5;
+      
+  }
   &:hover {
       background-position: left bottom;
   }
@@ -287,7 +301,7 @@ b {
   width: calc( 100% - 100px );
     margin: 0 auto;
     .single_article {
-        width: calc( 50% - 50px);
+        width: calc( 50% - 3vw);
         padding: 3vw 1.5vw 0;
         font-size: 17px;
         line-height: 1.6;
@@ -298,7 +312,9 @@ b {
       padding: 5px 10px;
       border: 2px solid rgba(0, 0, 0, 0);
       transition: all .5s;
-      min-height: 230px;
+      height: 16.5vw;
+      max-height:240px;
+      overflow:hidden;
 
       &.load {
           position: static;

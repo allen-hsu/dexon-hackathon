@@ -75,7 +75,8 @@ class Book extends PureComponent {
               <h2>幫助 </h2>
             </div>
           </BookLeft>
-          <BookCenter>
+          
+          {/* <BookCenter>
             <div>中間</div>
             <div>
               <ArticleList />
@@ -83,7 +84,8 @@ class Book extends PureComponent {
           </BookCenter>
           <BookRight>
             <div>右邊</div>
-          </BookRight>
+          </BookRight> */}
+
           {this.getEditorInfo()}
         </BookWrapper>
       );
