@@ -132,7 +132,7 @@ b {
   }
   .list_rate {
       overflow: auto;
-      height: calc( 100vh - 360px);
+      height: calc( 100vh - 340px);
       ul {
           padding: 0;
           margin: 0;
