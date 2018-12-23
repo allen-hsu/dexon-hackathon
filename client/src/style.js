@@ -176,8 +176,9 @@ b {
   }
   &.click_prev {
       background-position: left top;
-      right: -6vw;
-      bottom:180px;
+      left: -6vw;
+    //   right: -6vw;
+    //   bottom:180px;
       &:hover {
           background-position: left bottom;
       }
@@ -378,7 +379,16 @@ b {
       }
   }
 }
+}
 
+
+.rank_slide {
+    max-height:0;
+    overflow:hidden;
+    transition: all .5s;
+    &.open {
+        max-height:100vh;
+    }
 }
   
   `;

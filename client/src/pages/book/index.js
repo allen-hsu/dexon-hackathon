@@ -24,7 +24,16 @@ class Book extends PureComponent {
     super(props);
     this.init = false;
     this.update = false;
+    this.state = { isOpen: false }
   }
+
+
+  handleClickOnRankButton () {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+
   render() {
     const { web3States, rewardPool } = this.props;
     if (web3States) {
@@ -33,7 +42,7 @@ class Book extends PureComponent {
           <div className="top_info">
             <h1>Once Upon a Time...</h1>
             <div className="info">
-              總價值：163,423.5642 DEX • 已創作文字：2736238 • 獎池：{" "}
+            Tatal Value：163,423.5642 DEX • Created Text：2736238 • Bonus pool：{" "}
               {rewardPool / 1000000000000000000} DEX • 進行中
             </div>
           </div>
@@ -56,10 +65,10 @@ class Book extends PureComponent {
           <div>目前獎金{rewardPool}</div>
           <BookLeft>
             <div className="leader_board">
-              <h2>
-                排行榜 <i className="fa fa-angle-down" aria-hidden="true" />
+              <h2 onClick={ this.handleClickOnRankButton.bind(this) }  >
+              Leaderboard  <i className="fa fa-angle-down" aria-hidden="true" />
               </h2>
-              <div>
+              <div className={this.state.isOpen ? 'rank_slide open' : 'rank_slide'}>
                 <div className="img_box">
                   <img src={img_ico_wincup} alt="" />
                   <div className="top_rate">
@@ -72,7 +81,7 @@ class Book extends PureComponent {
               </div>
             </div>
             <div className="help_board">
-              <h2>幫助 </h2>
+              <h2>Help </h2>
             </div>
           </BookLeft>
           
