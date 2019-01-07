@@ -9,15 +9,13 @@
   "license": "ISC",
   "scripts": {
     "postinstall": "touch secret.js",
-    "compile": "dexon-truffle compile",
-    "migrate_local": "dexon-truffle migrate --network development --reset",
-    "test": "dexon-truffle test --network development",
-    "migrate": "dexon-truffle migrate --network dexon --reset"
+    "eth-compile": "npx truffle compile --reset",
+    "eth-mirgate-ropsten": "npx truffle migrate --network ropsten --reset"
   },
   "dependencies": {
-    "@dexon-foundation/truffle": "^4.1.16",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "truffle-hdwallet-provider": "github:trufflesuite/truffle-hdwallet-provider"
+    "truffle-hdwallet-provider": "^1.0.2",
+    "truffle": "^4.1.15"
   }
 }
